@@ -2,6 +2,8 @@
 
 Implement different Data Structures using TypeScript.
 
+<br>
+
 ## Singly Linked List
 ```ts
 import { SinglyLinkedList } from "https://deno.land/x/datastructure/mod.ts";
@@ -9,8 +11,10 @@ import { SinglyLinkedList } from "https://deno.land/x/datastructure/mod.ts";
 const singlyLinkedList = new SinglyLinkedList()
 
 // Time Complexity: O(1)
+singlyLinkedList.size	// get the size of the linked list
+
+// Time Complexity: O(1)
 singlyLinkedList.prepend('a')	// insert in the head
-singlyLinkedList.prepend('b')
 
 // Time Complexity: O(n)
 singlyLinkedList.append('c')	// insert in the tail
@@ -33,4 +37,43 @@ singlyLinkedList.remove('a')
 // Time Complexity:
 // head node: O(1), other nodes: O(n)
 singlyLinkedList.update('a', 'apple')
+```
+
+<br>
+<br>
+
+## Stack
+```ts
+import { Stack } from "https://deno.land/x/datastructure/mod.ts";
+
+const stack = new Stack()
+
+// Time Complexity: O(1)
+stack.size
+
+// Time Complexity: O(1)
+// return: boolean
+stack.push('Sourav')
+
+// Time Complexity: O(1)
+// return: string|number|boolean
+stack.pop()
+
+// Time Complexity:
+//	Top Node & Bottom Node:  O(1), other Nodes: O(n)
+// return: null|number [number: position of the item]
+stack.search('Sourav');
+
+// Time Complexity: O(1)
+// return: boolean
+stack.getTop()
+
+// Time Complexity: O(1)
+// return: boolean
+stack.getBottom()
+
+// Time Complexity:
+//	Top Node & Bottom Node:  O(1), other Nodes: O(n)
+// return: boolean
+stack.update('Sourav', 'Abm Sourav')
 ```

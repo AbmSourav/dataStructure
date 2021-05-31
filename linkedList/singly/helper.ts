@@ -16,14 +16,14 @@ export class Node {
 }
 
 // singly linked list interface
-export interface ILinkedList {
+export interface LinkedListApi {
 	size: number;
 	prepend(data: string): boolean;
 	append(data: string): boolean;
 	add(data: string, position: number): boolean;
-	print(): void
-	remove(value: string): boolean
-	update(oldValue: string|number, newValue: string|number): boolean
-	// deleteNode(node: Node): void;
-	// search(comparator: (data: T) => boolean): Node<T> | null;
+	getFromHead(): string|number|false;
+	getFromTail(): string|number|false;
+	print(): void;
+	remove(value: string): boolean;
+	update(oldValue: string|number, newValue: string|number): boolean;
 }

@@ -1,7 +1,7 @@
-import { ILinkedList, NodeType, Node } from "./helper.ts";
+import { LinkedListApi, NodeType, Node } from "./helper.ts";
 
 
-export class SinglyLinkedList implements ILinkedList {
+export class SinglyLinkedList implements LinkedListApi {
 	private head: null|NodeType
 	private tail: null|NodeType
 	public size: number
@@ -93,7 +93,7 @@ export class SinglyLinkedList implements ILinkedList {
 
 	getFromHead() {
 		if (this.head === null) {
-			return null
+			return false
 		}
 
 		return this.head.value;
@@ -101,7 +101,7 @@ export class SinglyLinkedList implements ILinkedList {
 
 	getFromTail() {
 		if (this.tail === null) {
-			return null
+			return false
 		}
 
 		return this.tail.value

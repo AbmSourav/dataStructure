@@ -8,10 +8,10 @@ singlyLinkedList.prepend('b')
 singlyLinkedList.append('c')
 singlyLinkedList.add('x', 2)
 
-// console.log(singlyLinkedList.getFromHead());
-// console.log(singlyLinkedList.getFromTail());
-// singlyLinkedList.remove('a')
+console.log(singlyLinkedList.getFromHead());
+console.log(singlyLinkedList.getFromTail());
+singlyLinkedList.remove('a')
 
-singlyLinkedList.update('a', 'aa')
+singlyLinkedList.update('b', 'bb')
 console.log(singlyLinkedList);
 singlyLinkedList.print()
