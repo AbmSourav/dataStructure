@@ -1,13 +1,17 @@
 import { SinglyLinkedList } from "./singly/singlyLinkedList.ts";
+// import { SinglyLinkedList } from "https://deno.land/x/datastructure/mod.ts"
 
 const singlyLinkedList = new SinglyLinkedList()
 
-singlyLinkedList.insertInHead('a')
-singlyLinkedList.insertInHead('b')
-singlyLinkedList.insertInTail('c')
-singlyLinkedList.insertInPositonX('x', 2)
+singlyLinkedList.prepend('a')
+singlyLinkedList.prepend('b')
+singlyLinkedList.append('c')
+singlyLinkedList.add('x', 2)
 
-// console.log(singlyLinkedList);
 // console.log(singlyLinkedList.getFromHead());
 // console.log(singlyLinkedList.getFromTail());
-singlyLinkedList.printValues()
+// singlyLinkedList.remove('a')
+
+singlyLinkedList.update('a', 'aa')
+console.log(singlyLinkedList);
+singlyLinkedList.print()

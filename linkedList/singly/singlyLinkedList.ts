@@ -2,9 +2,9 @@ import { ILinkedList, NodeType, Node } from "./helper.ts";
 
 
 export class SinglyLinkedList implements ILinkedList {
-	head: null|NodeType
-	tail: null|NodeType
-	size: number
+	private head: null|NodeType
+	private tail: null|NodeType
+	public size: number
 
 	constructor() {
 		this.head = null
@@ -12,7 +12,8 @@ export class SinglyLinkedList implements ILinkedList {
 		this.size = 0
 	}
 
-	insertInHead(data: string) {
+	// insert in the head
+	prepend(data: string|number) {
 		if (this.head === null) {
 			const newNode = new Node(data);
 			this.head = newNode
@@ -32,7 +33,8 @@ export class SinglyLinkedList implements ILinkedList {
 		return true;
 	}
 
-	insertInTail(data: string) {
+	// inset in the tail
+	append(data: string|number) {
 		if (this.head === null) {
 			const newNode = new Node(data);
 			this.head = newNode
@@ -41,8 +43,8 @@ export class SinglyLinkedList implements ILinkedList {
 			return true;
 		}
 
-		let currentNode = this.head
-		while ( currentNode !== null ) {
+		let currentNode: NodeType = this.head
+		while (currentNode !== null) {
 			const newItem = new Node(data);
 			this.tail = newItem
 
@@ -58,7 +60,8 @@ export class SinglyLinkedList implements ILinkedList {
 		return false;
 	}
 
-	insertInPositonX(data: string, position: number) {
+	// add anywhere of the linked list except head & tail
+	add(data: string|number, position: number) {
 		if (position === 0) {
 			console.error("Use `insertAtHead()` method to insert data at Head.");
 			return false;
@@ -104,11 +107,63 @@ export class SinglyLinkedList implements ILinkedList {
 		return this.tail.value
 	}
 
-	printValues() {
+	print() {
 		let currentNode = this.head
 		while (currentNode !== null) {
 			console.log(currentNode.value);
 			currentNode = currentNode.next
 		}
+	}
+
+	remove(value: string|number) {
+		if (this.head === null) {
+			return false;
+		}
+		if (this.head.value === value) {
+			this.head = this.head.next
+			this.size--
+			return true;
+		}
+
+		// two pointer approach
+		let previousNode: NodeType = null;
+		let currentNode: NodeType = this.head
+		while (currentNode !== null) {
+			if (value === currentNode.value) {
+				previousNode!.next = currentNode.next
+				this.size--
+				return true;
+			}
+
+			previousNode = currentNode
+			currentNode = currentNode.next
+		}
+
+		return false;
+	}
+
+	update(oldValue: string|number, newValue: string|number) {
+		if (this.head === null) {
+			return false;
+		}
+		if (this.head.value === oldValue) {
+			this.head.value = newValue
+			return true;
+		}
+		if (this.tail!.value === oldValue) {
+			this.tail!.value = newValue
+		}
+
+		let currentNode: NodeType = this.head
+		while (currentNode !== null) {
+			if (oldValue === currentNode.value) {
+				currentNode.value = newValue
+				return true;
+			}
+
+			currentNode = currentNode.next
+		}
+
+		return false;
 	}
 }
