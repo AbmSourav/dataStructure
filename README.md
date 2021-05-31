@@ -1,6 +1,9 @@
 # Data Structure
 
 Implement different Data Structures using TypeScript.
+Use this library API to create different Data Structures.
+<br>
+This library is also available as **[Deno Third party Module](https://deno.land/x/datastructure)**
 
 <br>
 
