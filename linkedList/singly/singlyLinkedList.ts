@@ -18,7 +18,7 @@ export class SinglyLinkedList implements LinkedListApi {
 			const newNode = new Node(data);
 			this.head = newNode
 			this.tail = newNode
-			this.size++;
+			// this.size++;
 			return true;
 		}
 
@@ -39,7 +39,7 @@ export class SinglyLinkedList implements LinkedListApi {
 			const newNode = new Node(data);
 			this.head = newNode
 			this.tail = newNode
-			this.size++;
+			// this.size++;
 			return true;
 		}
 
@@ -63,10 +63,10 @@ export class SinglyLinkedList implements LinkedListApi {
 	// add anywhere of the linked list except head & tail
 	add(data: string|number, position: number) {
 		if (position === 0) {
-			console.error("Use `insertAtHead()` method to insert data at Head.");
+			console.error("Use `prepend()` method to insert data at Head.");
 			return false;
 		} else if (position === this.size) {
-			console.error("Use `insertAtTail()` method to insert data at Tail.");
+			console.error("Use `append()` method to insert data at Tail.");
 			return false;
 		} else if (position > this.size && position != this.size + 1) {
 			console.error(`Out of range. Size of the linkedList is ${this.size}`);
@@ -118,10 +118,15 @@ export class SinglyLinkedList implements LinkedListApi {
 	remove(value: string|number) {
 		if (this.head === null) {
 			return false;
+		} else if (this.head!.next === null) {
+			this.tail = null
 		}
 		if (this.head.value === value) {
 			this.head = this.head.next
+			if (this.head!.next === null) this.tail = this.head
+
 			this.size--
+			if (this.head === null) this.size = 0
 			return true;
 		}
 
@@ -131,6 +136,8 @@ export class SinglyLinkedList implements LinkedListApi {
 		while (currentNode !== null) {
 			if (value === currentNode.value) {
 				previousNode!.next = currentNode.next
+				if (currentNode!.next === null) this.tail = this.head
+
 				this.size--
 				return true;
 			}
