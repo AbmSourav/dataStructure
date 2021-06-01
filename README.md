@@ -68,15 +68,54 @@ stack.pop()
 stack.search('Sourav');
 
 // Time Complexity: O(1)
-// return: boolean
+// return: string|number
 stack.getTop()
 
 // Time Complexity: O(1)
-// return: boolean
+// return: string|number
 stack.getBottom()
 
 // Time Complexity:
 //	Top Node & Bottom Node:  O(1), other Nodes: O(n)
 // return: boolean
 stack.update('Sourav', 'Abm Sourav')
+```
+
+<br>
+<br>
+
+## Queue
+```ts
+import { Queue } from "https://deno.land/x/datastructure/mod.ts";
+
+const queue = new Queue()
+
+// Time Complexity: O(1)
+queue.size
+
+// Time Complexity: O(1)
+// return: boolean
+queue.enqueue('Sourav')
+
+// Time Complexity: O(1)
+// return: string|number|boolean
+queue.dequeue()
+
+// Time Complexity:
+//   Top Node & Bottom Node:  O(1), other Nodes: O(n)
+// return: null|number [number: position of the item]
+queue.search('Sourav');
+
+// Time Complexity: O(1)
+// return: string|number
+queue.getFront()
+
+// Time Complexity: O(1)
+// return: string|number
+queue.getBack()
+
+// Time Complexity:
+//   Top Node & Bottom Node:  O(1), other Nodes: O(n)
+// return: boolean
+queue.update('Sourav', 'Abm Sourav')
 ```
