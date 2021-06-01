@@ -1,4 +1,4 @@
-import { StackType, StackApi, StackNode } from "./helper.ts"
+import { StackType, DataType, StackApi, StackNode } from "./helper.ts"
 
 export class Stack implements StackApi {
 	private topNode: StackType
@@ -12,20 +12,23 @@ export class Stack implements StackApi {
 	}
 
 	getTop() {
-		return this.topNode!.value
+		if (this.topNode === null) return null;
+		return this.topNode!.data
 	}
 
 	getBottom() {
-		return this.bottomNode!.value
+		if (this.topNode === null) return null;
+		return this.bottomNode!.data
 	}
 
-	push(value: string|number) {
+	push(data: DataType<any>) {
+		const newNode = new StackNode(data)
 		if (this.topNode === null) {
-			this.topNode = new StackNode(value)
-			this.bottomNode = new StackNode(value)
+			this.topNode = newNode
+			this.bottomNode = newNode
 			return true;
 		}
-		const newNode = new StackNode(value)
+		
 		newNode.next = this.topNode
 		if (newNode.next === null) {
 			this.bottomNode = newNode.next
@@ -48,53 +51,51 @@ export class Stack implements StackApi {
 		this.size--
 		if (this.topNode === null) this.size = 0
 
-		return node!.value;
+		return node!.data;
 	}
 
-	search(value: string|number) {
+	search(key: string|number) {
 		if (this.topNode === null) {
 			return null
 		}
 
-		if (value === this.topNode!.value) {
-			return 0
+		if (key === this.topNode!.data.key) {
+			return this.topNode!.data
 		}
-		if (value === this.bottomNode!.value) {
-			return this.size
+		if (key === this.bottomNode!.data.key) {
+			return this.bottomNode!.data
 		}
 
-		let count = 1
 		let currentNode = this.topNode!.next
 		while (currentNode !== null) {
-			if (value === currentNode.value) {
-				return count
+			if (key === currentNode.data.key) {
+				return currentNode.data
 			}
-			count++
 			currentNode = currentNode.next
 		}
 
 		return null
 	}
 
-	update(oldValue: string|number, newValue: string|number) {
+	update(key: string|number, newValue: any) {
 		if (this.topNode === null) {
 			return false
 		}
 
-		if (oldValue === this.topNode!.value) {
-			this.topNode!.value = newValue
-			return true
+		if (key === this.topNode!.data.key) {
+			this.topNode!.data.value = newValue
+			return this.topNode!.data
 		}
-		if (oldValue === this.bottomNode!.value) {
-			this.bottomNode!.value = newValue
-			return true
+		if (key === this.bottomNode!.data.key) {
+			this.bottomNode!.data.value = newValue
+			return this.bottomNode!.data
 		}
 
 		let currentNode: StackType = this.topNode
 		while (currentNode !== null) {
-			if (oldValue === currentNode.value) {
-				currentNode.value = newValue
-				return true
+			if (key === currentNode.data.key) {
+				currentNode.data.value = newValue
+				return currentNode.data
 			}
 
 			currentNode = currentNode.next

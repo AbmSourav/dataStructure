@@ -2,13 +2,14 @@
 import { Queue } from "./queue.ts";
 
 const queue = new Queue()
-queue.enqueue('a');
-queue.enqueue('Sourav')
-queue.enqueue('c')
-queue.enqueue('d')
+queue.enqueue({key: 'a', value: 'aa'});
+queue.enqueue({key: 'b', value: [1, 2, 5]})
+queue.enqueue({key: 'sourav', value: {name: "Sourav"}})
+
+// console.log(queue.getFront(), queue.getBack());
 
 // queue.dequeue()
-console.log(queue.update('Sourav', 'Abm'));
-console.log(queue.search('Sourav'));
+// console.log(queue.update('b', 'Abm'));
+// console.log(queue.search('sourav'));
 
-console.log(queue);
+console.log(queue.frontNode);

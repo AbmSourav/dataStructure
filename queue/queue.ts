@@ -1,7 +1,7 @@
-import { QueueType, QueueApi, QueueNode } from "./helper.ts"
+import { QueueType, DataType, QueueApi, QueueNode } from "./helper.ts"
 
 export class Queue implements QueueApi {
-	private frontNode: QueueType
+	public frontNode: QueueType
 	private backNode: QueueType
 	public size: number
 
@@ -12,15 +12,17 @@ export class Queue implements QueueApi {
 	}
 
 	getFront() {
-		return this.frontNode!.value
+		if (this.frontNode === null) return null
+		return this.frontNode!.data
 	}
 
 	getBack() {
-		return this.backNode!.value
+		if (this.frontNode === null) return null
+		return this.backNode!.data
 	}
 
-	enqueue(value: string|number) {
-		const newNode = new QueueNode(value)
+	enqueue(data: DataType<any>) {
+		const newNode = new QueueNode(data)
 		if (this.frontNode === null) {
 			// adding same pointer for frontNode & backNode
 			this.frontNode = newNode
@@ -54,54 +56,52 @@ export class Queue implements QueueApi {
 		this.size--
 		if (this.frontNode === null) this.size = 0
 
-		return node!.value;
+		return node!.data;
 	}
 
-	search(value: string|number) {
+	search(key: string|number) {
 		if (this.frontNode === null) {
 			return null
 		}
 
-		if (value === this.frontNode!.value) {
-			return 0
+		if (key === this.frontNode!.data.key) {
+			return this.frontNode!.data
 		}
-		if (value === this.backNode!.value) {
-			return this.size
+		if (key === this.backNode!.data.key) {
+			return this.backNode!.data
 		}
 
-		let count = 1
 		let currentNode = this.frontNode!.next
 		while (currentNode !== null) {
-			if (value === currentNode.value) {
-				return count
+			if (key === currentNode.data.key) {
+				return currentNode.data
 			}
 
-			count++
 			currentNode = currentNode.next
 		}
 
 		return null
 	}
 
-	update(oldValue: string|number, newValue: string|number) {
+	update(key: string|number, newValue: any) {
 		if (this.frontNode === null) {
 			return false
 		}
 
-		if (oldValue === this.frontNode!.value) {
-			this.frontNode!.value = newValue
-			return true
+		if (key === this.frontNode!.data.key) {
+			this.frontNode!.data.value = newValue
+			return this.frontNode!.data
 		}
-		if (oldValue === this.backNode!.value) {
-			this.backNode!.value = newValue
-			return true
+		if (key === this.backNode!.data.key) {
+			this.backNode!.data.value = newValue
+			return this.backNode!.data
 		}
 
 		let currentNode = this.frontNode!.next
 		while (currentNode !== null) {
-			if (oldValue === currentNode.value) {
-				currentNode.value = newValue
-				return true
+			if (key === currentNode.data.key) {
+				currentNode.data.value = newValue
+				return currentNode.data
 			}
 
 			currentNode = currentNode.next

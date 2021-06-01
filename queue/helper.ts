@@ -1,14 +1,20 @@
+// data type
+export type DataType<T> = {
+	key: string|number
+	value: T
+}
+
 export type QueueType = {
-	value: string|number
+	data: DataType<any>
 	next: null|QueueType
 }|null
 
 export class QueueNode {
-	public value: string|number
+	public data: DataType<any>
 	public next: QueueType|null = null
 
-	constructor(data: string|number) {
-		this.value = data;
+	constructor(data: DataType<any>) {
+		this.data = data;
 		this.next = null;
 	}
 }
@@ -16,10 +22,10 @@ export class QueueNode {
 // Stack interface
 export interface QueueApi {
 	size: number;
-	getFront(): string|number
-	getBack(): string|number
-	enqueue(value: string|number): boolean
-	dequeue(): string|number|boolean
-	search(value: string|number): null|number
-	update(oldValue: string|number, newValue: string|number): boolean
+	getFront(): null|DataType<any>
+	getBack(): null|DataType<any>
+	enqueue(data: DataType<any>): boolean
+	dequeue(): boolean|DataType<any>
+	search(key: string|number): null|DataType<any>
+	update(key: string|number, newValue: any): boolean|DataType<any>
 }

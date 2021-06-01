@@ -1,14 +1,20 @@
+// data type
+export type DataType<T> = {
+	key: string|number
+	value: T
+}
+
 export type StackType = {
-	value: string|number
+	data: DataType<any>
 	next: null|StackType
 }|null
 
 export class StackNode {
-	public value: string|number
+	public data: DataType<any>
 	public next: StackType|null = null
 
-	constructor(data: string|number) {
-		this.value = data;
+	constructor(data: DataType<any>) {
+		this.data = data;
 		this.next = null;
 	}
 }
@@ -16,10 +22,10 @@ export class StackNode {
 // Stack interface
 export interface StackApi {
 	size: number;
-	getTop(): string|number
-	getBottom(): string|number
-	push(value: string|number): boolean
-	pop(): string|number|boolean
-	search(value: string|number): null|number
-	// update(oldValue: string|number, newValue: string|number): boolean
+	getTop(): null|DataType<any>
+	getBottom(): null|DataType<any>
+	push(data: DataType<any>): boolean
+	pop(): boolean|DataType<any>
+	search(key: string|number): null|DataType<any>
+	update(key: string|number, newValue: any): boolean|DataType<any>
 }
