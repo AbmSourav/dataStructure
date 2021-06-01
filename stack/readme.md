@@ -1,6 +1,11 @@
 ## Stack Api
 
 ```ts
+DataType<T> = {
+	key: string|number
+	value: T
+}
+
 // Time Complexity: O(1)
 size: number;
 
