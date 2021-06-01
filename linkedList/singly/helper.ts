@@ -1,16 +1,22 @@
 
+// data type
+export type DataType<T> = {
+	key: string|number
+	value: T
+}
+
 // singly linked list node class
 export type NodeType = {
-	value: string|number
+	data: DataType<any>
 	next: null|NodeType
 }|null
  
 export class Node {
-	public value: string|number
+	public data: DataType<any>
 	public next: NodeType|null = null
 
-	constructor(data: string|number) {
-		this.value = data;
+	constructor(data: DataType<any>) {
+		this.data = data;
 		this.next = null;
 	}
 }
@@ -18,12 +24,13 @@ export class Node {
 // singly linked list interface
 export interface LinkedListApi {
 	size: number;
-	prepend(data: string): boolean;
-	append(data: string): boolean;
-	add(data: string, position: number): boolean;
-	getFromHead(): string|number|false;
-	getFromTail(): string|number|false;
+	prepend(data: DataType<any>): boolean;
+	append(data: DataType<any>): boolean;
+	add(data: DataType<any>, position: number): boolean;
+	getFromHead(): object|false;
+	getFromTail(): object|false;
 	print(): void;
-	remove(value: string): boolean;
-	update(oldValue: string|number, newValue: string|number): boolean;
+	remove(key: string|number): object|boolean;
+	update(key: string|number, newValue: any): object|boolean;
+	search(key: string|number): object|null
 }

@@ -1,4 +1,4 @@
-import { LinkedListApi, NodeType, Node } from "./helper.ts";
+import { LinkedListApi, NodeType, DataType, Node } from "./helper.ts";
 
 
 export class SinglyLinkedList implements LinkedListApi {
@@ -13,12 +13,11 @@ export class SinglyLinkedList implements LinkedListApi {
 	}
 
 	// insert in the head
-	prepend(data: string|number) {
+	prepend(data: DataType<any>) {
 		if (this.head === null) {
 			const newNode = new Node(data);
 			this.head = newNode
 			this.tail = newNode
-			// this.size++;
 			return true;
 		}
 
@@ -34,12 +33,11 @@ export class SinglyLinkedList implements LinkedListApi {
 	}
 
 	// inset in the tail
-	append(data: string|number) {
+	append(data: DataType<any>) {
 		if (this.head === null) {
 			const newNode = new Node(data);
 			this.head = newNode
 			this.tail = newNode
-			// this.size++;
 			return true;
 		}
 
@@ -60,8 +58,8 @@ export class SinglyLinkedList implements LinkedListApi {
 		return false;
 	}
 
-	// add anywhere of the linked list except head & tail
-	add(data: string|number, position: number) {
+	// // add anywhere of the linked list except head & tail
+	add(data: DataType<any>, position: number) {
 		if (position === 0) {
 			console.error("Use `prepend()` method to insert data at Head.");
 			return false;
@@ -96,7 +94,7 @@ export class SinglyLinkedList implements LinkedListApi {
 			return false
 		}
 
-		return this.head.value;
+		return this.head.data;
 	}
 
 	getFromTail() {
@@ -104,42 +102,44 @@ export class SinglyLinkedList implements LinkedListApi {
 			return false
 		}
 
-		return this.tail.value
+		return this.tail.data
 	}
 
 	print() {
 		let currentNode = this.head
 		while (currentNode !== null) {
-			console.log(currentNode.value);
+			console.log(currentNode.data);
 			currentNode = currentNode.next
 		}
 	}
 
-	remove(value: string|number) {
+	remove(key: string|number) {
 		if (this.head === null) {
 			return false;
 		} else if (this.head!.next === null) {
 			this.tail = null
 		}
-		if (this.head.value === value) {
+		if (this.head.data.key === key) {
+			const prevHeadData = this.head.data
 			this.head = this.head.next
 			if (this.head!.next === null) this.tail = this.head
 
 			this.size--
 			if (this.head === null) this.size = 0
-			return true;
+			return prevHeadData;
 		}
 
 		// two pointer approach
 		let previousNode: NodeType = null;
 		let currentNode: NodeType = this.head
 		while (currentNode !== null) {
-			if (value === currentNode.value) {
+			if (key === currentNode.data.key) {
+				const temp = currentNode.data
 				previousNode!.next = currentNode.next
-				if (currentNode!.next === null) this.tail = this.head
+				if (currentNode!.next === null) this.tail = previousNode
 
 				this.size--
-				return true;
+				return temp;
 			}
 
 			previousNode = currentNode
@@ -149,28 +149,53 @@ export class SinglyLinkedList implements LinkedListApi {
 		return false;
 	}
 
-	update(oldValue: string|number, newValue: string|number) {
+	update(key: string|number, newValue: any) {
 		if (this.head === null) {
 			return false;
 		}
-		if (this.head.value === oldValue) {
-			this.head.value = newValue
-			return true;
+
+		if (this.head.data.key === key) {
+			this.head.data.value = newValue
+			return this.head.data;
 		}
-		if (this.tail!.value === oldValue) {
-			this.tail!.value = newValue
+		if (this.tail!.data.key === key) {
+			this.tail!.data.value = newValue
 		}
 
-		let currentNode: NodeType = this.head
+		let currentNode = this.head.next
 		while (currentNode !== null) {
-			if (oldValue === currentNode.value) {
-				currentNode.value = newValue
-				return true;
+			if (currentNode.data.key === key) {
+				currentNode.data.value = newValue
+				return currentNode.data;
 			}
 
 			currentNode = currentNode.next
 		}
 
 		return false;
+	}
+
+	search(key: string|number) {
+		if (this.head === null) {
+			return null;
+		}
+
+		if (this.head.data.key === key) {
+			return this.head.data;
+		}
+		if (this.tail!.data.key === key) {
+			return this.tail!.data
+		}
+
+		let currentNode = this.head.next
+		while (currentNode !== null) {
+			if (currentNode.data.key === key) {
+				return currentNode.data;
+			}
+
+			currentNode = currentNode.next
+		}
+
+		return null;
 	}
 }
