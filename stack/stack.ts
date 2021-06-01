@@ -20,10 +20,9 @@ export class Stack implements StackApi {
 	}
 
 	push(value: string|number) {
-		if (this.size === 0) {
+		if (this.topNode === null) {
 			this.topNode = new StackNode(value)
 			this.bottomNode = new StackNode(value)
-			this.size++
 			return true;
 		}
 		const newNode = new StackNode(value)
@@ -38,21 +37,22 @@ export class Stack implements StackApi {
 	}
 
 	pop() {
-		if (this.size === 0) {
+		if (this.topNode === null) {
 			return false;
-		} else if (this.size === 1) {
+		} else if (this.topNode!.next === null) {
 			this.bottomNode = null
 		}
 		
 		const node = this.topNode
 		this.topNode = node!.next
 		this.size--
+		if (this.topNode === null) this.size = 0
 
 		return node!.value;
 	}
 
 	search(value: string|number) {
-		if (this.size === 0) {
+		if (this.topNode === null) {
 			return null
 		}
 
@@ -60,16 +60,15 @@ export class Stack implements StackApi {
 			return 0
 		}
 		if (value === this.bottomNode!.value) {
-			return this.size + 1
+			return this.size
 		}
 
-		let count = 0
-		let currentNode = this.topNode
+		let count = 1
+		let currentNode = this.topNode!.next
 		while (currentNode !== null) {
 			if (value === currentNode.value) {
 				return count
 			}
-
 			count++
 			currentNode = currentNode.next
 		}
@@ -78,7 +77,7 @@ export class Stack implements StackApi {
 	}
 
 	update(oldValue: string|number, newValue: string|number) {
-		if (this.size === 0) {
+		if (this.topNode === null) {
 			return false
 		}
 
@@ -91,7 +90,7 @@ export class Stack implements StackApi {
 			return true
 		}
 
-		let currentNode = this.topNode
+		let currentNode: StackType = this.topNode
 		while (currentNode !== null) {
 			if (oldValue === currentNode.value) {
 				currentNode.value = newValue

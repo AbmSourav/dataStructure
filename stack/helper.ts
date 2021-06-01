@@ -21,5 +21,5 @@ export interface StackApi {
 	push(value: string|number): boolean
 	pop(): string|number|boolean
 	search(value: string|number): null|number
-	update(oldValue: string|number, newValue: string|number): boolean
+	// update(oldValue: string|number, newValue: string|number): boolean
 }
