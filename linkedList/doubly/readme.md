@@ -1,4 +1,4 @@
-## Dubbly Linked List Api
+## Doubly Linked List Api
 
 ```ts
 DataType<T> = {
