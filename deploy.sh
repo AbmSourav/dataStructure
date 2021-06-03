@@ -10,7 +10,11 @@ fi
 
 echo "Deleting hidden settings..."
 vscode=".vscode"
-if [ -d $vscode ]; then rm -R $vscode; fi
+if [ -d $vscode ]; then 
+	rm -R $vscode; 
+	git add -A
+	git commit -m "workspace settings removed"
+fi
 
 echo "Release Version: "
 read version
@@ -20,7 +24,7 @@ read comments
 echo ""
 
 echo "Creating git tag..."
-# git tag $version -m "$comments"
+git tag $version -m "$comments"
 
 
 echo "Press Y to push new release"
