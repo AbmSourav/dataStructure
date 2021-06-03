@@ -1,7 +1,7 @@
 import { LinkedListApi, NodeType, DataType, Node } from "./helper.ts";
 
 
-export class SinglyLinkedList implements LinkedListApi {
+export class DoublyLinkedList implements LinkedListApi {
 	private head: null|NodeType
 	private tail: null|NodeType
 	public size: number
@@ -14,21 +14,25 @@ export class SinglyLinkedList implements LinkedListApi {
 
 	// insert in the head
 	prepend(data: DataType<any>) {
+		const newNode = new Node(data);
 		if (this.head === null) {
-			const newNode = new Node(data);
 			this.head = newNode
 			this.tail = newNode
 			return true;
 		}
 
 		const currentNode = this.head
-		this.head = new Node(data)
+		this.head = newNode
 		this.head.next = currentNode
-		if (currentNode.next === null) {
-			this.tail = currentNode
-		}
-		this.size++
+		currentNode.prev = newNode
+		// this.tail!.prev = newNode
+		// if (currentNode.next === null) {
+		// 	this.tail = currentNode
+		// } else {
+		// 	currentNode.prev = this.head
+		// }
 
+		this.size++
 		return true;
 	}
 
@@ -41,8 +45,10 @@ export class SinglyLinkedList implements LinkedListApi {
 			return true;
 		}
 
+		const currentNode = this.tail
 		this.tail!.next = newNode
 		this.tail = newNode
+		this.tail.prev = currentNode
 		this.size++
 
 		return false;
@@ -68,6 +74,7 @@ export class SinglyLinkedList implements LinkedListApi {
 			if (count === position) {
 				prevNode!.next = new Node(data)
 				prevNode!.next.next = currentNode
+				prevNode!.next.next.prev = prevNode!.next
 				this.size++
 			}
 	
@@ -106,17 +113,22 @@ export class SinglyLinkedList implements LinkedListApi {
 	remove(key: string|number) {
 		if (this.head === null) {
 			return false;
-		} else if (this.head!.next === null) {
-			this.tail = null
 		}
 		if (this.head.data.key === key) {
 			const prevHeadData = this.head.data
 			this.head = this.head.next
-			if (this.head!.next === null) this.tail = this.head
+			if (this.head === null) this.tail = this.head
 
 			this.size--
 			if (this.head === null) this.size = 0
 			return prevHeadData;
+		}
+		if (this.tail!.data.key === key) {
+			const prevTailData = this.tail!.data
+			
+			this.tail = this.tail!.prev
+			this.tail!.next = null
+			return prevTailData;
 		}
 
 		// two pointer approach
@@ -126,6 +138,7 @@ export class SinglyLinkedList implements LinkedListApi {
 			if (key === currentNode.data.key) {
 				const temp = currentNode.data
 				previousNode!.next = currentNode.next
+				currentNode.next!.prev = previousNode
 				if (currentNode!.next === null) this.tail = previousNode
 
 				this.size--
