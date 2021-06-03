@@ -1,4 +1,5 @@
-import { QueueType, DataType, QueueApi, QueueNode } from "./helper.ts"
+import { QueueType, DataType, QueueApi } from "./helper.d.ts"
+import { QueueNode } from "./queueNode.ts"
 
 export class Queue implements QueueApi {
 	public frontNode: QueueType

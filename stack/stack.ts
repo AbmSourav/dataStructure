@@ -1,4 +1,5 @@
-import { StackType, DataType, StackApi, StackNode } from "./helper.ts"
+import { StackType, DataType, StackApi } from "./helper.d.ts"
+import { StackNode } from "./stackNode.ts"
 
 export class Stack implements StackApi {
 	private topNode: StackType

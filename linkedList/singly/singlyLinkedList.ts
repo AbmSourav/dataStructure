@@ -1,4 +1,5 @@
-import { LinkedListApi, NodeType, DataType, Node } from "./helper.ts";
+import { LinkedListApi, NodeType, DataType } from "./helper.d.ts";
+import { SinglyNode } from "./singlyNode.ts";
 
 
 export class SinglyLinkedList implements LinkedListApi {
@@ -15,14 +16,14 @@ export class SinglyLinkedList implements LinkedListApi {
 	// insert in the head
 	prepend(data: DataType<any>) {
 		if (this.head === null) {
-			const newNode = new Node(data);
+			const newNode = new SinglyNode(data);
 			this.head = newNode
 			this.tail = newNode
 			return true;
 		}
 
 		const currentNode = this.head
-		this.head = new Node(data)
+		this.head = new SinglyNode(data)
 		this.head.next = currentNode
 		if (currentNode.next === null) {
 			this.tail = currentNode
@@ -34,7 +35,7 @@ export class SinglyLinkedList implements LinkedListApi {
 
 	// inset in the tail
 	append(data: DataType<any>) {
-		const newNode = new Node(data);
+		const newNode = new SinglyNode(data);
 		if (this.head === null) {
 			this.head = newNode
 			this.tail = newNode
@@ -66,7 +67,7 @@ export class SinglyLinkedList implements LinkedListApi {
 		let count = 0
 		while (currentNode !== null) {
 			if (count === position) {
-				prevNode!.next = new Node(data)
+				prevNode!.next = new SinglyNode(data)
 				prevNode!.next.next = currentNode
 				this.size++
 			}

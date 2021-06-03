@@ -10,16 +10,6 @@ export type NodeType = {
 	data: DataType<any>
 	next: null|NodeType
 }|null
- 
-export class Node {
-	public data: DataType<any>
-	public next: NodeType|null = null
-
-	constructor(data: DataType<any>) {
-		this.data = data;
-		this.next = null;
-	}
-}
 
 // singly linked list interface
 export interface LinkedListApi {

@@ -30,7 +30,7 @@ print(): void;
 remove(key: string|number): object|boolean;
 
 // Time Complexity:
-// head node: O(1), other nodes: O(n)
+// head node & tail: O(1), other nodes: O(n)
 update(key: string|number, newValue: any): object|boolean;
 
 // Time Complexity:

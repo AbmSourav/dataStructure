@@ -1,4 +1,5 @@
-import { LinkedListApi, NodeType, DataType, Node } from "./helper.ts";
+import { LinkedListApi, NodeType, DataType } from "./helper.d.ts";
+import { DoublyNode } from "./doublyNode.ts";
 
 
 export class DoublyLinkedList implements LinkedListApi {
@@ -14,7 +15,7 @@ export class DoublyLinkedList implements LinkedListApi {
 
 	// insert in the head
 	prepend(data: DataType<any>) {
-		const newNode = new Node(data);
+		const newNode = new DoublyNode(data);
 		if (this.head === null) {
 			this.head = newNode
 			this.tail = newNode
@@ -38,7 +39,7 @@ export class DoublyLinkedList implements LinkedListApi {
 
 	// inset in the tail
 	append(data: DataType<any>) {
-		const newNode = new Node(data);
+		const newNode = new DoublyNode(data);
 		if (this.head === null) {
 			this.head = newNode
 			this.tail = newNode
@@ -72,7 +73,7 @@ export class DoublyLinkedList implements LinkedListApi {
 		let count = 0
 		while (currentNode !== null) {
 			if (count === position) {
-				prevNode!.next = new Node(data)
+				prevNode!.next = new DoublyNode(data)
 				prevNode!.next.next = currentNode
 				prevNode!.next.next.prev = prevNode!.next
 				this.size++
