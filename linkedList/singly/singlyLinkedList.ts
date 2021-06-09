@@ -1,6 +1,6 @@
 import { LinkedListApi, NodeType, DataType } from "./helper.d.ts";
 import { SinglyNode } from "./singlyNode.ts";
-
+import { addGenerator } from "./generators.ts"
 
 export class SinglyLinkedList implements LinkedListApi {
 	private head: null|NodeType
@@ -62,19 +62,12 @@ export class SinglyLinkedList implements LinkedListApi {
 			return false;
 		}
 	
-		let prevNode: NodeType = null;
 		let currentNode = this.head
-		let count = 0
-		while (currentNode !== null) {
-			if (count === position) {
-				prevNode!.next = new SinglyNode(data)
-				prevNode!.next.next = currentNode
-				this.size++
-			}
-	
-			prevNode = currentNode
-			currentNode = currentNode.next
-			count++
+		// *generator function for add method
+		const iterator = addGenerator(currentNode, data, position)
+		const iteratorNext = iterator.next()
+		if (iteratorNext.value) {
+			this.size++
 		}
 
 		return true;

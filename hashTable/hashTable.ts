@@ -3,35 +3,44 @@ import { hashFunction } from "./hashFunction.ts";
 import { HashNode } from "./hashNode.ts";
 
 export class HashTable implements HashTableApi {
-	private table: Array<any>
-	public size: number
+	public table: Array<any>
+	public length: number
 
 	constructor() {
-		this.table = new Array(10)
-		this.size = 0
+		this.table = new Array()
+		this.length = 0
 	}
 
 	add(data: DataType<any>) {
 		const index = hashFunction(data.key)
 		const node = new HashNode(data)
 
-		if (this.table[index] !== undefined) {
-			this.table[index].next = node
-			return true;
+		if (this.table[index] === undefined) {
+			this.table[index] = node
+			this.length++
+			return true
 		}
-		this.table[index] = node
-		this.size++;
-		return true
+		
+		let currentNode = this.table[index].next
+		while (currentNode !== null) {
+			if (currentNode.next === null) {
+				currentNode.next = node
+				return true
+			}
+
+			currentNode = currentNode.next
+		}
+		this.table[index].next = node
+		return true;
 	}
 
 	remove(key: string) {
 		let index = hashFunction(key)
 		if (this.table[index] !== undefined) {
 			if (this.table[index].data.key === key) {
-				const data = this.table[index].data
 				delete this.table[index]
-				this.size--
-				return data;
+				this.length--
+				return true;
 			}
 		}
 

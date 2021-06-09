@@ -11,7 +11,7 @@ export type NodeType = {
 }|null
 
 export interface HashTableApi {
-	size: number
+	length: number
 	add(data: DataType<any>): boolean
 	remove(key: string): boolean|any[]
 	log(column: string[]): void
