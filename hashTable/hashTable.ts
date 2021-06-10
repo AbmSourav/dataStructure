@@ -1,6 +1,14 @@
-import { HashTableApi, NodeType, DataType } from "./helper.d.ts";
+import { HashTableApi, DataType } from "./helper.d.ts";
 import { hashFunction } from "./hashFunction.ts";
 import { HashNode } from "./hashNode.ts";
+import { 
+	addGenerator,
+	removeGenerator,
+	updateGenerator,
+	getGenerator,
+	iteratorGenerator
+} from "./generators.ts";
+
 
 export class HashTable implements HashTableApi {
 	public table: Array<any>
@@ -20,27 +28,82 @@ export class HashTable implements HashTableApi {
 			this.length++
 			return true
 		}
-		
-		let currentNode = this.table[index].next
-		while (currentNode !== null) {
-			if (currentNode.next === null) {
-				currentNode.next = node
-				return true
-			}
-
-			currentNode = currentNode.next
+		if (this.table[index].next === null) {
+			this.table[index].next = node
+			return true
 		}
-		this.table[index].next = node
-		return true;
+
+		let currentNode = this.table[index].next
+		// *generator function for add method.
+		const iterator = addGenerator(currentNode, node)
+		const iteratorNext = iterator.next()
+		if (iteratorNext.value) {
+			return true
+		}
+		
+		return false;
 	}
 
 	remove(key: string) {
 		let index = hashFunction(key)
-		if (this.table[index] !== undefined) {
-			if (this.table[index].data.key === key) {
-				delete this.table[index]
-				this.length--
-				return true;
+		if (this.table[index] === undefined) return false
+
+		if (this.table[index].data.key === key) {
+			delete this.table[index]
+			this.length--
+			return true;
+		}
+
+		if (this.table[index].next !== null) {
+			let currentNode = this.table[index]
+			// *generator function for remove method.
+			const iterator = removeGenerator(key, currentNode)
+			const iteratorNext = iterator.next()
+			if (iteratorNext.value) {
+				return true
+			}
+		}
+
+		return false
+	}
+
+	update(key: string, newValue: any) {
+		let index = hashFunction(key)
+		if (this.table[index] === undefined) return false
+
+		if (this.table[index].data.key === key) {
+			this.table[index].data.value = newValue
+			return this.table[index].data.value;
+		}
+
+		if (this.table[index].next !== null) {
+			let currentNode = this.table[index]
+			// *generator function for update method.
+			const iterator = updateGenerator(key, newValue, currentNode)
+			const iteratorNext = iterator.next()
+			if (iteratorNext.value) {
+				return true
+			}
+		}
+		
+		return false
+	}
+
+	get(key: string) {
+		let index = hashFunction(key)
+		if (this.table[index] === undefined) return false
+
+		if (this.table[index].data.key === key) {
+			return this.table[index].data;
+		}
+
+		if (this.table[index].next !== null) {
+			let currentNode = this.table[index]
+			// *generator function for get method.
+			const iterator = getGenerator(key, currentNode)
+			const iteratorNext = iterator.next()
+			if (iteratorNext.value) {
+				return iteratorNext.value
 			}
 		}
 
@@ -52,5 +115,10 @@ export class HashTable implements HashTableApi {
 			return console.table(this.table, column)
 		}
 		return console.table(this.table);
+	}
+
+	iterator() {
+		const iterator = iteratorGenerator(this.table, this.length)
+		return iterator
 	}
 }

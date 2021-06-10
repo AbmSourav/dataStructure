@@ -1,36 +1,28 @@
 import { HashTable } from "./hashTable.ts"
+import { assert, assertEquals } from "https://deno.land/std/testing/asserts.ts";
 
 const hashTable = new HashTable()
 
-// hashTable.add({key: "apple", value: "Apple"})
-// hashTable.add({key: "apple", value: {company: "Apple LLC"}})
-// hashTable.add({key: "apple", value: {product: "iPhone"}})
-// hashTable.add({key: "microsoft", value: "MicroSoft"})
+hashTable.add({key: "abm", value: "Sourav"})
+hashTable.add({key: "bma", value: {company: "Apple LLC"}})
+hashTable.add({key: "appl", value: {product: "iPhone"}})
+hashTable.add({key: "microsoft", value: "MicroSoft"})
 // hashTable.add({key: "Linux", value: "Ubuntu"})
 // hashTable.add({key: "ChromeOS", value: "Google"})
-// console.log(hashTable.remove("ChromeOS"));
+// console.log(hashTable.remove("microsoft"));
 
-// console.log(hashTable);
+// const it = hashTable.iterator()
+// console.log(it.next(), it.next(), it.next());
+
+// console.log(hashTable.update('bma', {name: 'Apple'}));
+console.log(hashTable.get('bma'))
+
 // hashTable.log()
 
+// Deno.test("Add", function() {
+// 	assertEquals(hashTable.add({key: "abm", value: "Sourav"}), true)
+// })
 
-class LinkedList {
-	testIterator() {
-	  return {
-		[Symbol.iterator]: function() {
-		  return {
-			next() {
-			  return {
-				value: 'a value',
-				done: false
-			  };
-			}
-		  };
-		}
-	  };
-	}
-  }
-  
-  // const linkedList = new LinkedList();
-  // console.log([...linkedList.testIterator()]);
-  
+// Deno.test("remove", function() {
+// 	assertEquals(hashTable.remove("microsoft"), false);
+// })
