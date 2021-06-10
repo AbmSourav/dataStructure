@@ -119,7 +119,7 @@ export class HashTable implements HashTableApi {
 
 	iterator() {
 		// generator function that returns an iterator
-		const iterator = iteratorGenerator(this.table, this.length)
+		const iterator = iteratorGenerator(this.table)
 		return iterator
 	}
 }

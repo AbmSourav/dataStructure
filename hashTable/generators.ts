@@ -26,7 +26,7 @@ export function *removeGenerator(key: string, currentNode: NodeType) {
 	return false
 }
 
-export function *iteratorGenerator(table: Array<any>, length: number) {
+export function *iteratorGenerator(table: Array<any>) {
 	for (let key in table) {
 		yield table[key]
 	}
