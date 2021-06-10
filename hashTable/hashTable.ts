@@ -34,7 +34,7 @@ export class HashTable implements HashTableApi {
 		}
 
 		let currentNode = this.table[index].next
-		// *generator function for add method.
+		// generator function that returns an iterator
 		const iterator = addGenerator(currentNode, node)
 		const iteratorNext = iterator.next()
 		if (iteratorNext.value) {
@@ -56,7 +56,7 @@ export class HashTable implements HashTableApi {
 
 		if (this.table[index].next !== null) {
 			let currentNode = this.table[index]
-			// *generator function for remove method.
+			// generator function that returns an iterator
 			const iterator = removeGenerator(key, currentNode)
 			const iteratorNext = iterator.next()
 			if (iteratorNext.value) {
@@ -78,7 +78,7 @@ export class HashTable implements HashTableApi {
 
 		if (this.table[index].next !== null) {
 			let currentNode = this.table[index]
-			// *generator function for update method.
+			// generator function that returns an iterator
 			const iterator = updateGenerator(key, newValue, currentNode)
 			const iteratorNext = iterator.next()
 			if (iteratorNext.value) {
@@ -99,7 +99,7 @@ export class HashTable implements HashTableApi {
 
 		if (this.table[index].next !== null) {
 			let currentNode = this.table[index]
-			// *generator function for get method.
+			// generator function that returns an iterator
 			const iterator = getGenerator(key, currentNode)
 			const iteratorNext = iterator.next()
 			if (iteratorNext.value) {
@@ -118,6 +118,7 @@ export class HashTable implements HashTableApi {
 	}
 
 	iterator() {
+		// generator function that returns an iterator
 		const iterator = iteratorGenerator(this.table, this.length)
 		return iterator
 	}
