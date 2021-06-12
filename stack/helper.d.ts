@@ -18,4 +18,6 @@ export interface StackApi {
 	pop(): boolean|DataType<any>
 	search(key: string|number): null|DataType<any>
 	update(key: string|number, newValue: any): boolean|DataType<any>
+	log(): void
+	iterator(): Generator
 }

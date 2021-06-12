@@ -9,7 +9,7 @@ DataType<T> = {
 // Time Complexity: O(1)
 size: number;
 
-// Time Complexity: O(n)
+// *generator function, it returens an iterator.
 iterator(): Generator
 
 // Time Complexity: O(1)

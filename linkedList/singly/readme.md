@@ -9,7 +9,7 @@ DataType<T> = {
 // Time Complexity: O(1)
 size: number;
 
-// Time Complexity: O(n)
+// *generator function, it returens an iterator.
 iterator(): Generator
 
 // Time Complexity: O(1)
@@ -60,7 +60,7 @@ while (iteratorNext.done === false) {
 }
 
 // linked list size
-singlyLinkedList.size	// get the size of the linked list
+singlyLinkedList.size
 
 // adding data at the head of linked list
 singlyLinkedList.prepend({key: 'a', value: 'apple'})

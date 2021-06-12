@@ -1,5 +1,11 @@
 import { StackType, DataType, StackApi } from "./helper.d.ts"
 import { StackNode } from "./stackNode.ts"
+import {
+	searchGenerator,
+	updateGenerator,
+	iteratorGenerator
+} from "./generators.ts"
+
 
 export class Stack implements StackApi {
 	private topNode: StackType
@@ -67,12 +73,11 @@ export class Stack implements StackApi {
 			return this.bottomNode!.data
 		}
 
-		let currentNode = this.topNode!.next
-		while (currentNode !== null) {
-			if (key === currentNode.data.key) {
-				return currentNode.data
-			}
-			currentNode = currentNode.next
+		// generator function that returns an iterator
+		const iterator = searchGenerator(key, this.topNode)
+		const iteratorNext = iterator.next()
+		if (iteratorNext.value) {
+			return iteratorNext.value
 		}
 
 		return null
@@ -92,16 +97,27 @@ export class Stack implements StackApi {
 			return this.bottomNode!.data
 		}
 
-		let currentNode: StackType = this.topNode
-		while (currentNode !== null) {
-			if (key === currentNode.data.key) {
-				currentNode.data.value = newValue
-				return currentNode.data
-			}
-
-			currentNode = currentNode.next
+		// generator function that returns an iterator
+		const iterator = updateGenerator(key, this.topNode, newValue)
+		const iteratorNext = iterator.next()
+		if (iteratorNext.value) {
+			return iteratorNext.value
 		}
 
 		return false
+	}
+
+	log() {
+		let currentNode = this.topNode
+		while (currentNode !== null) {
+			console.log(currentNode.data);
+			currentNode = currentNode.next
+		}
+	}
+
+	iterator() {
+		// generator function that returns an iterator
+		const iterator = iteratorGenerator(this.topNode)
+		return iterator
 	}
 }
