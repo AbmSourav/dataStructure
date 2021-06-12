@@ -16,6 +16,7 @@ export interface QueueApi {
 	getBack(): null|DataType<any>
 	enqueue(data: DataType<any>): boolean
 	dequeue(): boolean|DataType<any>
-	search(key: string|number): null|DataType<any>
+	search(key: string|number): boolean|DataType<any>
 	update(key: string|number, newValue: any): boolean|DataType<any>
+	log(): void
 }

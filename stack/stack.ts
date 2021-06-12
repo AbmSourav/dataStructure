@@ -63,7 +63,7 @@ export class Stack implements StackApi {
 
 	search(key: string|number) {
 		if (this.topNode === null) {
-			return null
+			return false
 		}
 
 		if (key === this.topNode!.data.key) {
@@ -80,7 +80,7 @@ export class Stack implements StackApi {
 			return iteratorNext.value
 		}
 
-		return null
+		return false
 	}
 
 	update(key: string|number, newValue: any) {
