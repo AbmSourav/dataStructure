@@ -31,6 +31,9 @@ search(key: string|number): null|DataType<any>
 // Time Complexity:
 // Top Node & Bottom Node:  O(1), other Nodes: O(n)
 update(key: string|number, newValue: any): boolean|DataType<any>
+
+// Time Complexity: O(n)
+log(): void;
 ```
 
 <br>
@@ -73,4 +76,7 @@ stack.getBottom()
 
 // update stack item data
 stack.update('a', {name: 'Abm Sourav'})
+
+// console all values
+stack.log()
 ```
