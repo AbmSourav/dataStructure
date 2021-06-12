@@ -1,5 +1,11 @@
 import { LinkedListApi, NodeType, DataType } from "./helper.d.ts";
 import { DoublyNode } from "./doublyNode.ts";
+import {
+	addGenerator,
+	updateGenerator,
+	searchGenerator,
+	iteratorGenerator
+} from "./generators.ts"
 
 
 export class DoublyLinkedList implements LinkedListApi {
@@ -26,12 +32,6 @@ export class DoublyLinkedList implements LinkedListApi {
 		this.head = newNode
 		this.head.next = currentNode
 		currentNode.prev = newNode
-		// this.tail!.prev = newNode
-		// if (currentNode.next === null) {
-		// 	this.tail = currentNode
-		// } else {
-		// 	currentNode.prev = this.head
-		// }
 
 		this.size++
 		return true;
@@ -68,23 +68,15 @@ export class DoublyLinkedList implements LinkedListApi {
 			return false;
 		}
 	
-		let prevNode: NodeType = null;
-		let currentNode = this.head
-		let count = 0
-		while (currentNode !== null) {
-			if (count === position) {
-				prevNode!.next = new DoublyNode(data)
-				prevNode!.next.next = currentNode
-				prevNode!.next.next.prev = prevNode!.next
-				this.size++
-			}
-	
-			prevNode = currentNode
-			currentNode = currentNode.next
-			count++
+		// generator function that returns an iterator
+		const iterator = addGenerator(this.head, data, position)
+		const iteratorNext = iterator.next()
+		if (iteratorNext.value) {
+			this.size++
+			return true
 		}
 
-		return true;
+		return false;
 	}
 
 	getFromHead() {
@@ -103,7 +95,7 @@ export class DoublyLinkedList implements LinkedListApi {
 		return this.tail.data
 	}
 
-	print() {
+	log() {
 		let currentNode = this.head
 		while (currentNode !== null) {
 			console.log(currentNode.data);
@@ -167,14 +159,12 @@ export class DoublyLinkedList implements LinkedListApi {
 			return this.tail!.data;
 		}
 
-		let currentNode = this.head.next
-		while (currentNode !== null) {
-			if (currentNode.data.key === key) {
-				currentNode.data.value = newValue
-				return currentNode.data;
-			}
-
-			currentNode = currentNode.next
+		// generator function that returns an iterator
+		const iterator = updateGenerator(key, this.head, newValue)
+		const iteratorNext = iterator.next()
+		if (iteratorNext.value) {
+			this.size++
+			return iteratorNext.value
 		}
 
 		return false;
@@ -182,7 +172,7 @@ export class DoublyLinkedList implements LinkedListApi {
 
 	search(key: string|number) {
 		if (this.head === null) {
-			return null;
+			return false;
 		}
 
 		if (this.head.data.key === key) {
@@ -192,15 +182,20 @@ export class DoublyLinkedList implements LinkedListApi {
 			return this.tail!.data
 		}
 
-		let currentNode = this.head.next
-		while (currentNode !== null) {
-			if (currentNode.data.key === key) {
-				return currentNode.data;
-			}
-
-			currentNode = currentNode.next
+		// generator function that returns an iterator
+		const iterator = searchGenerator(key, this.head)
+		const iteratorNext = iterator.next()
+		if (iteratorNext.value) {
+			this.size++
+			return iteratorNext.value
 		}
 
-		return null;
+		return false;
+	}
+
+	iterator() {
+		// generator function that returns an iterator
+		const iterator = iteratorGenerator(this.head)
+		return iterator
 	}
 }
