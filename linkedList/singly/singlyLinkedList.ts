@@ -1,6 +1,11 @@
 import { LinkedListApi, NodeType, DataType } from "./helper.d.ts";
 import { SinglyNode } from "./singlyNode.ts";
-
+import {
+	addGenerator,
+	updateGenerator,
+	searchGenerator,
+	iteratorGenerator
+} from "./generators.ts"
 
 export class SinglyLinkedList implements LinkedListApi {
 	private head: null|NodeType
@@ -62,22 +67,16 @@ export class SinglyLinkedList implements LinkedListApi {
 			return false;
 		}
 	
-		let prevNode: NodeType = null;
 		let currentNode = this.head
-		let count = 0
-		while (currentNode !== null) {
-			if (count === position) {
-				prevNode!.next = new SinglyNode(data)
-				prevNode!.next.next = currentNode
-				this.size++
-			}
-	
-			prevNode = currentNode
-			currentNode = currentNode.next
-			count++
+		// generator function that returns an iterator
+		const iterator = addGenerator(currentNode, data, position)
+		const iteratorNext = iterator.next()
+		if (iteratorNext.value) {
+			this.size++
+			return true
 		}
 
-		return true;
+		return false;
 	}
 
 	getFromHead() {
@@ -96,7 +95,7 @@ export class SinglyLinkedList implements LinkedListApi {
 		return this.tail.data
 	}
 
-	print() {
+	log() {
 		let currentNode = this.head
 		while (currentNode !== null) {
 			console.log(currentNode.data);
@@ -117,7 +116,7 @@ export class SinglyLinkedList implements LinkedListApi {
 
 			this.size--
 			if (this.head === null) this.size = 0
-			return prevHeadData;
+			return true;
 		}
 
 		// two pointer approach
@@ -130,7 +129,7 @@ export class SinglyLinkedList implements LinkedListApi {
 				if (currentNode!.next === null) this.tail = previousNode
 
 				this.size--
-				return temp;
+				return true;
 			}
 
 			previousNode = currentNode
@@ -155,13 +154,11 @@ export class SinglyLinkedList implements LinkedListApi {
 		}
 
 		let currentNode = this.head.next
-		while (currentNode !== null) {
-			if (currentNode.data.key === key) {
-				currentNode.data.value = newValue
-				return currentNode.data;
-			}
-
-			currentNode = currentNode.next
+		// generator function that returns an iterator
+		const iterator = updateGenerator(key, currentNode, newValue)
+		const iteratorNext = iterator.next()
+		if (iteratorNext.value) {
+			return iteratorNext.value
 		}
 
 		return false;
@@ -169,7 +166,7 @@ export class SinglyLinkedList implements LinkedListApi {
 
 	search(key: string|number) {
 		if (this.head === null) {
-			return null;
+			return false;
 		}
 
 		if (this.head.data.key === key) {
@@ -180,14 +177,20 @@ export class SinglyLinkedList implements LinkedListApi {
 		}
 
 		let currentNode = this.head.next
-		while (currentNode !== null) {
-			if (currentNode.data.key === key) {
-				return currentNode.data;
-			}
-
-			currentNode = currentNode.next
+		// generator function that returns an iterator
+		const iterator = searchGenerator(key, currentNode)
+		const iteratorNext = iterator.next()
+		if (iteratorNext.value) {
+			return iteratorNext.value
 		}
 
-		return null;
+		return false;
+	}
+
+	iterator() {
+		const currentNode = this.head
+		// generator function that returns an iterator
+		const iterator = iteratorGenerator(currentNode)
+		return iterator
 	}
 }

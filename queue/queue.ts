@@ -1,5 +1,11 @@
 import { QueueType, DataType, QueueApi } from "./helper.d.ts"
 import { QueueNode } from "./queueNode.ts"
+import {
+	searchGenerator,
+	updateGenerator,
+	iteratorGenerator
+} from "./generators.ts"
+
 
 export class Queue implements QueueApi {
 	public frontNode: QueueType
@@ -32,12 +38,6 @@ export class Queue implements QueueApi {
 		}
 
 		// pointer and it's greatness
-		// frontNode & backNode both have same reference.
-		// so backNode.next will also update frontNode.next
-
-		// then in secound insertion frontNode & backNode pointers are changed,
-		// but frontNode.next & backNode.next pointers are still same.
-		// so backNode.next will also update frontNode.next
 		this.backNode!.next = newNode
 		this.backNode = newNode
 		this.size++
@@ -62,7 +62,7 @@ export class Queue implements QueueApi {
 
 	search(key: string|number) {
 		if (this.frontNode === null) {
-			return null
+			return false
 		}
 
 		if (key === this.frontNode!.data.key) {
@@ -72,16 +72,14 @@ export class Queue implements QueueApi {
 			return this.backNode!.data
 		}
 
-		let currentNode = this.frontNode!.next
-		while (currentNode !== null) {
-			if (key === currentNode.data.key) {
-				return currentNode.data
-			}
-
-			currentNode = currentNode.next
+		// generator function that returns an iterator
+		const iterator = searchGenerator(key, this.frontNode)
+		const iteratorNext = iterator.next()
+		if (iteratorNext.value) {
+			return iteratorNext.value
 		}
 
-		return null
+		return false
 	}
 
 	update(key: string|number, newValue: any) {
@@ -98,16 +96,29 @@ export class Queue implements QueueApi {
 			return this.backNode!.data
 		}
 
-		let currentNode = this.frontNode!.next
-		while (currentNode !== null) {
-			if (key === currentNode.data.key) {
-				currentNode.data.value = newValue
-				return currentNode.data
-			}
-
-			currentNode = currentNode.next
+		// generator function that returns an iterator
+		const iterator = updateGenerator(key, this.frontNode, newValue)
+		const iteratorNext = iterator.next()
+		if (iteratorNext.value) {
+			return iteratorNext.value
 		}
 
 		return false
+	}
+
+	log() {
+		const iterator = this.iterator()
+		let iteratorNext = iterator.next()
+		
+		while (iteratorNext.done === false) {
+			console.log(iteratorNext.value);
+			iteratorNext = iterator.next()
+		}
+	}
+
+	iterator() {
+		// generator function that returns an iterator
+		const iterator = iteratorGenerator(this.frontNode)
+		return iterator
 	}
 }

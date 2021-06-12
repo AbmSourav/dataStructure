@@ -19,8 +19,9 @@ export interface LinkedListApi {
 	add(data: DataType<any>, position: number): boolean;
 	getFromHead(): object|false;
 	getFromTail(): object|false;
-	print(): void;
-	remove(key: string|number): object|boolean;
+	log(): void;
+	remove(key: string|number): boolean;
 	update(key: string|number, newValue: any): object|boolean;
-	search(key: string|number): object|null
+	search(key: string|number): object|boolean
+	iterator(): Generator
 }
