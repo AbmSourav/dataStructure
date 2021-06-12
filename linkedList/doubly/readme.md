@@ -26,7 +26,7 @@ getFromHead(): object|false;
 getFromTail(): object|false;
 
 // Time Complexity: O(n)
-print(): void;
+log(): void;
 
 // Time Complexity:
 // head node: O(1), other nodes: O(n)
