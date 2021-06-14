@@ -9,22 +9,22 @@ iterator(): Generator
 
 // Time Complexity: 
 //  average cases: O(1)
-//  wrost case: O(n)
+//  worst case: O(n)
 add(data: DataType<any>): boolean
 
 // Time Complexity: 
 //  average cases: O(1)
-//  wrost case: O(n)
+//  worst case: O(n)
 remove(key: string): boolean|any[]
 
 // Time Complexity: 
 //  average cases: O(1)
-//  wrost case: O(n)
+//  worst case: O(n)
 update(key: string, newValue: DataType<any>): boolean|DataType<any>
 
 // Time Complexity: 
 //  average cases: O(1)
-//  wrost case: O(n)
+//  worst case: O(n)
 get(key: string): boolean|DataType<any>
 
 // Time Complexity: O(n)
@@ -40,10 +40,13 @@ import { HashTable } from "https://deno.land/x/datastructure/mod.ts";
 
 const hashTable = new HashTable()
 
+// add element in the hash table
+// if hash keys are same, then it will create chaining with LinkedList
 hashTable.add({key: "abm", value: "Sourav"})
 hashTable.add({key: "apple", value: {company: "Apple Inc"}})
 hashTable.add({key: "arr", value: [1, 2, 3]})
 
+// remove element from hastabel
 hashTable.remove("arr");
 
 const iterator = hashTable.iterator()
@@ -54,9 +57,12 @@ while (iteratorNext.done === false) {
 	iteratorNext = iterator.next()
 }
 
+// get element from hash table
 hashTable.get('abm')
 
+// update elements using the key
 hashTable.update('abm', {name: 'AbmSourav'})
 
+// console all values
 hashTable.log()
 ```
