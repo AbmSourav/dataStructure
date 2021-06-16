@@ -12,12 +12,12 @@ hashTable.add({key: "microsoft", value: "MicroSoft"})
 // console.log(hashTable.remove("microsoft"));
 
 // const it = hashTable.iterator()
-// console.log(it.next(), it.next(), it.next());
+// console.log(it.next(), it.next(), it.next(), it.next());
 
 // console.log(hashTable.update('bma', {name: 'Apple'}));
-console.log(hashTable.get('bma'))
+// console.log(hashTable)
 
-// hashTable.log()
+hashTable.log()
 
 // Deno.test("Add", function() {
 // 	assertEquals(hashTable.add({key: "abm", value: "Sourav"}), true)

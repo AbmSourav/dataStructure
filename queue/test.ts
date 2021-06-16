@@ -20,5 +20,5 @@ queue.enqueue({key: 'sourav', value: {name: "Sourav"}})
 // 	iteratorNext = iterator.next()
 // }
 
-// console.log(queue);
-queue.log()
+console.log(queue);
+// queue.log()

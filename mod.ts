@@ -9,7 +9,7 @@
  * @email <keramotul.islam@gmail.com>
  * @authorUrl https://abmsourav.com
  * @sourceCode https://github.com/AbmSourav/dataStructure
- * @version 1.0.1
+ * @version 1.0.4
  * 
  * Copyright (c) 2021 Keramot UL Islam
  */
