@@ -62,25 +62,25 @@ function* getGenerator(key, currentNode) {
     return false;
 }
 class HashTable1 {
-    table;
+    #table;
     length;
     constructor(){
-        this.table = new Array();
+        this.#table = new Array();
         this.length = 0;
     }
     add(data) {
         const index = hashFunction(data.key);
         const node = new HashNode(data);
-        if (this.table[index] === undefined) {
-            this.table[index] = node;
+        if (this.#table[index] === undefined) {
+            this.#table[index] = node;
             this.length++;
             return true;
         }
-        if (this.table[index].next === null) {
-            this.table[index].next = node;
+        if (this.#table[index].next === null) {
+            this.#table[index].next = node;
             return true;
         }
-        let currentNode = this.table[index].next;
+        let currentNode = this.#table[index].next;
         const iterator = addGenerator(currentNode, node);
         const iteratorNext = iterator.next();
         if (iteratorNext.value) {
@@ -90,14 +90,14 @@ class HashTable1 {
     }
     remove(key) {
         let index = hashFunction(key);
-        if (this.table[index] === undefined) return false;
-        if (this.table[index].data.key === key) {
-            delete this.table[index];
+        if (this.#table[index] === undefined) return false;
+        if (this.#table[index].data.key === key) {
+            delete this.#table[index];
             this.length--;
             return true;
         }
-        if (this.table[index].next !== null) {
-            let currentNode = this.table[index];
+        if (this.#table[index].next !== null) {
+            let currentNode = this.#table[index];
             const iterator = removeGenerator(key, currentNode);
             const iteratorNext = iterator.next();
             if (iteratorNext.value) {
@@ -108,13 +108,13 @@ class HashTable1 {
     }
     update(key, newValue) {
         let index = hashFunction(key);
-        if (this.table[index] === undefined) return false;
-        if (this.table[index].data.key === key) {
-            this.table[index].data.value = newValue;
-            return this.table[index].data.value;
+        if (this.#table[index] === undefined) return false;
+        if (this.#table[index].data.key === key) {
+            this.#table[index].data.value = newValue;
+            return this.#table[index].data.value;
         }
-        if (this.table[index].next !== null) {
-            let currentNode = this.table[index];
+        if (this.#table[index].next !== null) {
+            let currentNode = this.#table[index];
             const iterator = updateGenerator(key, newValue, currentNode);
             const iteratorNext = iterator.next();
             if (iteratorNext.value) {
@@ -125,12 +125,12 @@ class HashTable1 {
     }
     get(key) {
         let index = hashFunction(key);
-        if (this.table[index] === undefined) return false;
-        if (this.table[index].data.key === key) {
-            return this.table[index].data;
+        if (this.#table[index] === undefined) return false;
+        if (this.#table[index].data.key === key) {
+            return this.#table[index].data;
         }
-        if (this.table[index].next !== null) {
-            let currentNode = this.table[index];
+        if (this.#table[index].next !== null) {
+            let currentNode = this.#table[index];
             const iterator = getGenerator(key, currentNode);
             const iteratorNext = iterator.next();
             if (iteratorNext.value) {
@@ -141,12 +141,12 @@ class HashTable1 {
     }
     log(column = []) {
         if (column.length > 0) {
-            return console.table(this.table, column);
+            return console.table(this.#table, column);
         }
-        return console.table(this.table);
+        return console.table(this.#table);
     }
     iterator() {
-        const iterator = iteratorGenerator(this.table);
+        const iterator = iteratorGenerator(this.#table);
         return iterator;
     }
 }
@@ -200,39 +200,39 @@ function* iteratorGenerator1(currentNode) {
     return false;
 }
 class SinglyLinkedList1 {
-    head;
-    tail;
+    #head;
+    #tail;
     size;
     constructor(){
-        this.head = null;
-        this.tail = null;
+        this.#head = null;
+        this.#tail = null;
         this.size = 0;
     }
     prepend(data) {
-        if (this.head === null) {
+        if (this.#head === null) {
             const newNode = new SinglyNode(data);
-            this.head = newNode;
-            this.tail = newNode;
+            this.#head = newNode;
+            this.#tail = newNode;
             return true;
         }
-        const currentNode = this.head;
-        this.head = new SinglyNode(data);
-        this.head.next = currentNode;
+        const currentNode = this.#head;
+        this.#head = new SinglyNode(data);
+        this.#head.next = currentNode;
         if (currentNode.next === null) {
-            this.tail = currentNode;
+            this.#tail = currentNode;
         }
         this.size++;
         return true;
     }
     append(data) {
         const newNode = new SinglyNode(data);
-        if (this.head === null) {
-            this.head = newNode;
-            this.tail = newNode;
+        if (this.#head === null) {
+            this.#head = newNode;
+            this.#tail = newNode;
             return true;
         }
-        this.tail.next = newNode;
-        this.tail = newNode;
+        this.#tail.next = newNode;
+        this.#tail = newNode;
         this.size++;
         return false;
     }
@@ -247,7 +247,7 @@ class SinglyLinkedList1 {
             console.error(`Out of range. Size of the linkedList is ${this.size}`);
             return false;
         }
-        let currentNode = this.head;
+        let currentNode = this.#head;
         const iterator = addGenerator1(currentNode, data, position);
         const iteratorNext = iterator.next();
         if (iteratorNext.value) {
@@ -257,45 +257,45 @@ class SinglyLinkedList1 {
         return false;
     }
     getFromHead() {
-        if (this.head === null) {
+        if (this.#head === null) {
             return false;
         }
-        return this.head.data;
+        return this.#head.data;
     }
     getFromTail() {
-        if (this.tail === null) {
+        if (this.#tail === null) {
             return false;
         }
-        return this.tail.data;
+        return this.#tail.data;
     }
     log() {
-        let currentNode = this.head;
+        let currentNode = this.#head;
         while(currentNode !== null){
             console.log(currentNode.data);
             currentNode = currentNode.next;
         }
     }
     remove(key) {
-        if (this.head === null) {
+        if (this.#head === null) {
             return false;
-        } else if (this.head.next === null) {
-            this.tail = null;
+        } else if (this.#head.next === null) {
+            this.#tail = null;
         }
-        if (this.head.data.key === key) {
-            const prevHeadData = this.head.data;
-            this.head = this.head.next;
-            if (this.head.next === null) this.tail = this.head;
+        if (this.#head.data.key === key) {
+            const prevHeadData = this.#head.data;
+            this.#head = this.#head.next;
+            if (this.#head.next === null) this.#tail = this.#head;
             this.size--;
-            if (this.head === null) this.size = 0;
+            if (this.#head === null) this.size = 0;
             return true;
         }
         let previousNode = null;
-        let currentNode = this.head;
+        let currentNode = this.#head;
         while(currentNode !== null){
             if (key === currentNode.data.key) {
                 const temp = currentNode.data;
                 previousNode.next = currentNode.next;
-                if (currentNode.next === null) this.tail = previousNode;
+                if (currentNode.next === null) this.#tail = previousNode;
                 this.size--;
                 return true;
             }
@@ -305,18 +305,18 @@ class SinglyLinkedList1 {
         return false;
     }
     update(key, newValue) {
-        if (this.head === null) {
+        if (this.#head === null) {
             return false;
         }
-        if (this.head.data.key === key) {
-            this.head.data.value = newValue;
-            return this.head.data;
+        if (this.#head.data.key === key) {
+            this.#head.data.value = newValue;
+            return this.#head.data;
         }
-        if (this.tail.data.key === key) {
-            this.tail.data.value = newValue;
-            return this.tail.data;
+        if (this.#tail.data.key === key) {
+            this.#tail.data.value = newValue;
+            return this.#tail.data;
         }
-        let currentNode = this.head.next;
+        let currentNode = this.#head.next;
         const iterator = updateGenerator1(key, currentNode, newValue);
         const iteratorNext = iterator.next();
         if (iteratorNext.value) {
@@ -325,16 +325,16 @@ class SinglyLinkedList1 {
         return false;
     }
     search(key) {
-        if (this.head === null) {
+        if (this.#head === null) {
             return false;
         }
-        if (this.head.data.key === key) {
-            return this.head.data;
+        if (this.#head.data.key === key) {
+            return this.#head.data;
         }
-        if (this.tail.data.key === key) {
-            return this.tail.data;
+        if (this.#tail.data.key === key) {
+            return this.#tail.data;
         }
-        let currentNode = this.head.next;
+        let currentNode = this.#head.next;
         const iterator = searchGenerator(key, currentNode);
         const iteratorNext = iterator.next();
         if (iteratorNext.value) {
@@ -343,7 +343,7 @@ class SinglyLinkedList1 {
         return false;
     }
     iterator() {
-        const currentNode = this.head;
+        const currentNode = this.#head;
         const iterator = iteratorGenerator1(currentNode);
         return iterator;
     }
@@ -400,39 +400,39 @@ function* iteratorGenerator2(currentNode) {
     return false;
 }
 class DoublyLinkedList1 {
-    head;
-    tail;
+    #head;
+    #tail;
     size;
     constructor(){
-        this.head = null;
-        this.tail = null;
+        this.#head = null;
+        this.#tail = null;
         this.size = 0;
     }
     prepend(data) {
         const newNode = new DoublyNode(data);
-        if (this.head === null) {
-            this.head = newNode;
-            this.tail = newNode;
+        if (this.#head === null) {
+            this.#head = newNode;
+            this.#tail = newNode;
             return true;
         }
-        const currentNode = this.head;
-        this.head = newNode;
-        this.head.next = currentNode;
+        const currentNode = this.#head;
+        this.#head = newNode;
+        this.#head.next = currentNode;
         currentNode.prev = newNode;
         this.size++;
         return true;
     }
     append(data) {
         const newNode = new DoublyNode(data);
-        if (this.head === null) {
-            this.head = newNode;
-            this.tail = newNode;
+        if (this.#head === null) {
+            this.#head = newNode;
+            this.#tail = newNode;
             return true;
         }
-        const currentNode = this.tail;
-        this.tail.next = newNode;
-        this.tail = newNode;
-        this.tail.prev = currentNode;
+        const currentNode = this.#tail;
+        this.#tail.next = newNode;
+        this.#tail = newNode;
+        this.#tail.prev = currentNode;
         this.size++;
         return false;
     }
@@ -447,7 +447,7 @@ class DoublyLinkedList1 {
             console.error(`Out of range. Size of the linkedList is ${this.size}`);
             return false;
         }
-        const iterator = addGenerator2(this.head, data, position);
+        const iterator = addGenerator2(this.#head, data, position);
         const iteratorNext = iterator.next();
         if (iteratorNext.value) {
             this.size++;
@@ -456,50 +456,50 @@ class DoublyLinkedList1 {
         return false;
     }
     getFromHead() {
-        if (this.head === null) {
+        if (this.#head === null) {
             return false;
         }
-        return this.head.data;
+        return this.#head.data;
     }
     getFromTail() {
-        if (this.tail === null) {
+        if (this.#tail === null) {
             return false;
         }
-        return this.tail.data;
+        return this.#tail.data;
     }
     log() {
-        let currentNode = this.head;
+        let currentNode = this.#head;
         while(currentNode !== null){
             console.log(currentNode.data);
             currentNode = currentNode.next;
         }
     }
     remove(key) {
-        if (this.head === null) {
+        if (this.#head === null) {
             return false;
         }
-        if (this.head.data.key === key) {
-            const prevHeadData = this.head.data;
-            this.head = this.head.next;
-            if (this.head === null) this.tail = this.head;
+        if (this.#head.data.key === key) {
+            const prevHeadData = this.#head.data;
+            this.#head = this.#head.next;
+            if (this.#head === null) this.#tail = this.#head;
             this.size--;
-            if (this.head === null) this.size = 0;
+            if (this.#head === null) this.size = 0;
             return prevHeadData;
         }
-        if (this.tail.data.key === key) {
-            const prevTailData = this.tail.data;
-            this.tail = this.tail.prev;
-            this.tail.next = null;
+        if (this.#tail.data.key === key) {
+            const prevTailData = this.#tail.data;
+            this.#tail = this.#tail.prev;
+            this.#tail.next = null;
             return prevTailData;
         }
         let previousNode = null;
-        let currentNode = this.head;
+        let currentNode = this.#head;
         while(currentNode !== null){
             if (key === currentNode.data.key) {
                 const temp = currentNode.data;
                 previousNode.next = currentNode.next;
                 currentNode.next.prev = previousNode;
-                if (currentNode.next === null) this.tail = previousNode;
+                if (currentNode.next === null) this.#tail = previousNode;
                 this.size--;
                 return temp;
             }
@@ -509,18 +509,18 @@ class DoublyLinkedList1 {
         return false;
     }
     update(key, newValue) {
-        if (this.head === null) {
+        if (this.#head === null) {
             return false;
         }
-        if (this.head.data.key === key) {
-            this.head.data.value = newValue;
-            return this.head.data;
+        if (this.#head.data.key === key) {
+            this.#head.data.value = newValue;
+            return this.#head.data;
         }
-        if (this.tail.data.key === key) {
-            this.tail.data.value = newValue;
-            return this.tail.data;
+        if (this.#tail.data.key === key) {
+            this.#tail.data.value = newValue;
+            return this.#tail.data;
         }
-        const iterator = updateGenerator2(key, this.head, newValue);
+        const iterator = updateGenerator2(key, this.#head, newValue);
         const iteratorNext = iterator.next();
         if (iteratorNext.value) {
             this.size++;
@@ -529,16 +529,16 @@ class DoublyLinkedList1 {
         return false;
     }
     search(key) {
-        if (this.head === null) {
+        if (this.#head === null) {
             return false;
         }
-        if (this.head.data.key === key) {
-            return this.head.data;
+        if (this.#head.data.key === key) {
+            return this.#head.data;
         }
-        if (this.tail.data.key === key) {
-            return this.tail.data;
+        if (this.#tail.data.key === key) {
+            return this.#tail.data;
         }
-        const iterator = searchGenerator1(key, this.head);
+        const iterator = searchGenerator1(key, this.#head);
         const iteratorNext = iterator.next();
         if (iteratorNext.value) {
             this.size++;
@@ -547,7 +547,7 @@ class DoublyLinkedList1 {
         return false;
     }
     iterator() {
-        const iterator = iteratorGenerator2(this.head);
+        const iterator = iteratorGenerator2(this.#head);
         return iterator;
     }
 }
