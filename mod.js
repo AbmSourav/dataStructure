@@ -587,11 +587,11 @@ function* iteratorGenerator3(currentNode) {
 }
 class Stack1 {
     #topNode;
-    bottomNode;
+    #bottomNode;
     size;
     constructor(){
         this.#topNode = null;
-        this.bottomNode = null;
+        this.#bottomNode = null;
         this.size = 0;
     }
     getTop() {
@@ -600,18 +600,18 @@ class Stack1 {
     }
     getBottom() {
         if (this.#topNode === null) return null;
-        return this.bottomNode.data;
+        return this.#bottomNode.data;
     }
     push(data) {
         const newNode = new StackNode(data);
         if (this.#topNode === null) {
             this.#topNode = newNode;
-            this.bottomNode = newNode;
+            this.#bottomNode = newNode;
             return true;
         }
         newNode.next = this.#topNode;
         if (newNode.next === null) {
-            this.bottomNode = newNode.next;
+            this.#bottomNode = newNode.next;
         }
         this.#topNode = newNode;
         this.size++;
@@ -621,7 +621,7 @@ class Stack1 {
         if (this.#topNode === null) {
             return false;
         } else if (this.#topNode.next === null) {
-            this.bottomNode = null;
+            this.#bottomNode = null;
         }
         const node = this.#topNode;
         this.#topNode = node.next;
@@ -636,8 +636,8 @@ class Stack1 {
         if (key === this.#topNode.data.key) {
             return this.#topNode.data;
         }
-        if (key === this.bottomNode.data.key) {
-            return this.bottomNode.data;
+        if (key === this.#bottomNode.data.key) {
+            return this.#bottomNode.data;
         }
         const iterator = searchGenerator2(key, this.#topNode);
         const iteratorNext = iterator.next();
@@ -654,9 +654,9 @@ class Stack1 {
             this.#topNode.data.value = newValue;
             return this.#topNode.data;
         }
-        if (key === this.bottomNode.data.key) {
-            this.bottomNode.data.value = newValue;
-            return this.bottomNode.data;
+        if (key === this.#bottomNode.data.key) {
+            this.#bottomNode.data.value = newValue;
+            return this.#bottomNode.data;
         }
         const iterator = updateGenerator3(key, this.#topNode, newValue);
         const iteratorNext = iterator.next();
@@ -712,57 +712,57 @@ function* iteratorGenerator4(currentNode) {
     return false;
 }
 class Queue1 {
-    frontNode;
-    backNode;
+    #frontNode;
+    #backNode;
     size;
     constructor(){
-        this.frontNode = null;
-        this.backNode = null;
+        this.#frontNode = null;
+        this.#backNode = null;
         this.size = 0;
     }
     getFront() {
-        if (this.frontNode === null) return null;
-        return this.frontNode.data;
+        if (this.#frontNode === null) return null;
+        return this.#frontNode.data;
     }
     getBack() {
-        if (this.frontNode === null) return null;
-        return this.backNode.data;
+        if (this.#frontNode === null) return null;
+        return this.#backNode.data;
     }
     enqueue(data) {
         const newNode = new QueueNode(data);
-        if (this.frontNode === null) {
-            this.frontNode = newNode;
-            this.backNode = newNode;
+        if (this.#frontNode === null) {
+            this.#frontNode = newNode;
+            this.#backNode = newNode;
             return true;
         }
-        this.backNode.next = newNode;
-        this.backNode = newNode;
+        this.#backNode.next = newNode;
+        this.#backNode = newNode;
         this.size++;
         return true;
     }
     dequeue() {
-        if (this.frontNode === null) {
+        if (this.#frontNode === null) {
             return false;
-        } else if (this.frontNode.next === null) {
-            this.backNode = null;
+        } else if (this.#frontNode.next === null) {
+            this.#backNode = null;
         }
-        const node = this.frontNode;
-        this.frontNode = node.next;
+        const node = this.#frontNode;
+        this.#frontNode = node.next;
         this.size--;
-        if (this.frontNode === null) this.size = 0;
+        if (this.#frontNode === null) this.size = 0;
         return node.data;
     }
     search(key) {
-        if (this.frontNode === null) {
+        if (this.#frontNode === null) {
             return false;
         }
-        if (key === this.frontNode.data.key) {
-            return this.frontNode.data;
+        if (key === this.#frontNode.data.key) {
+            return this.#frontNode.data;
         }
-        if (key === this.backNode.data.key) {
-            return this.backNode.data;
+        if (key === this.#backNode.data.key) {
+            return this.#backNode.data;
         }
-        const iterator = searchGenerator3(key, this.frontNode);
+        const iterator = searchGenerator3(key, this.#frontNode);
         const iteratorNext = iterator.next();
         if (iteratorNext.value) {
             return iteratorNext.value;
@@ -770,18 +770,18 @@ class Queue1 {
         return false;
     }
     update(key, newValue) {
-        if (this.frontNode === null) {
+        if (this.#frontNode === null) {
             return false;
         }
-        if (key === this.frontNode.data.key) {
-            this.frontNode.data.value = newValue;
-            return this.frontNode.data;
+        if (key === this.#frontNode.data.key) {
+            this.#frontNode.data.value = newValue;
+            return this.#frontNode.data;
         }
-        if (key === this.backNode.data.key) {
-            this.backNode.data.value = newValue;
-            return this.backNode.data;
+        if (key === this.#backNode.data.key) {
+            this.#backNode.data.value = newValue;
+            return this.#backNode.data;
         }
-        const iterator = updateGenerator4(key, this.frontNode, newValue);
+        const iterator = updateGenerator4(key, this.#frontNode, newValue);
         const iteratorNext = iterator.next();
         if (iteratorNext.value) {
             return iteratorNext.value;
@@ -797,7 +797,7 @@ class Queue1 {
         }
     }
     iterator() {
-        const iterator = iteratorGenerator4(this.frontNode);
+        const iterator = iteratorGenerator4(this.#frontNode);
         return iterator;
     }
 }

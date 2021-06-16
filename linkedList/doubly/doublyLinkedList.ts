@@ -9,28 +9,28 @@ import {
 
 
 export class DoublyLinkedList implements LinkedListApi {
-	private head: null|NodeType
-	private tail: null|NodeType
+	#head: null|NodeType
+	#tail: null|NodeType
 	public size: number
 
 	constructor() {
-		this.head = null
-		this.tail = null
+		this.#head = null
+		this.#tail = null
 		this.size = 0
 	}
 
 	// insert in the head
 	prepend(data: DataType<any>) {
 		const newNode = new DoublyNode(data);
-		if (this.head === null) {
-			this.head = newNode
-			this.tail = newNode
+		if (this.#head === null) {
+			this.#head = newNode
+			this.#tail = newNode
 			return true;
 		}
 
-		const currentNode = this.head
-		this.head = newNode
-		this.head.next = currentNode
+		const currentNode = this.#head
+		this.#head = newNode
+		this.#head.next = currentNode
 		currentNode.prev = newNode
 
 		this.size++
@@ -40,16 +40,16 @@ export class DoublyLinkedList implements LinkedListApi {
 	// inset in the tail
 	append(data: DataType<any>) {
 		const newNode = new DoublyNode(data);
-		if (this.head === null) {
-			this.head = newNode
-			this.tail = newNode
+		if (this.#head === null) {
+			this.#head = newNode
+			this.#tail = newNode
 			return true;
 		}
 
-		const currentNode = this.tail
-		this.tail!.next = newNode
-		this.tail = newNode
-		this.tail.prev = currentNode
+		const currentNode = this.#tail
+		this.#tail!.next = newNode
+		this.#tail = newNode
+		this.#tail.prev = currentNode
 		this.size++
 
 		return false;
@@ -69,7 +69,7 @@ export class DoublyLinkedList implements LinkedListApi {
 		}
 	
 		// generator function that returns an iterator
-		const iterator = addGenerator(this.head, data, position)
+		const iterator = addGenerator(this.#head, data, position)
 		const iteratorNext = iterator.next()
 		if (iteratorNext.value) {
 			this.size++
@@ -80,23 +80,23 @@ export class DoublyLinkedList implements LinkedListApi {
 	}
 
 	getFromHead() {
-		if (this.head === null) {
+		if (this.#head === null) {
 			return false
 		}
 
-		return this.head.data;
+		return this.#head.data;
 	}
 
 	getFromTail() {
-		if (this.tail === null) {
+		if (this.#tail === null) {
 			return false
 		}
 
-		return this.tail.data
+		return this.#tail.data
 	}
 
 	log() {
-		let currentNode = this.head
+		let currentNode = this.#head
 		while (currentNode !== null) {
 			console.log(currentNode.data);
 			currentNode = currentNode.next
@@ -104,35 +104,35 @@ export class DoublyLinkedList implements LinkedListApi {
 	}
 
 	remove(key: string|number) {
-		if (this.head === null) {
+		if (this.#head === null) {
 			return false;
 		}
-		if (this.head.data.key === key) {
-			const prevHeadData = this.head.data
-			this.head = this.head.next
-			if (this.head === null) this.tail = this.head
+		if (this.#head.data.key === key) {
+			const prevHeadData = this.#head.data
+			this.#head = this.#head.next
+			if (this.#head === null) this.#tail = this.#head
 
 			this.size--
-			if (this.head === null) this.size = 0
+			if (this.#head === null) this.size = 0
 			return prevHeadData;
 		}
-		if (this.tail!.data.key === key) {
-			const prevTailData = this.tail!.data
+		if (this.#tail!.data.key === key) {
+			const prevTailData = this.#tail!.data
 			
-			this.tail = this.tail!.prev
-			this.tail!.next = null
+			this.#tail = this.#tail!.prev
+			this.#tail!.next = null
 			return prevTailData;
 		}
 
 		// two pointer approach
 		let previousNode: NodeType = null;
-		let currentNode: NodeType = this.head
+		let currentNode: NodeType = this.#head
 		while (currentNode !== null) {
 			if (key === currentNode.data.key) {
 				const temp = currentNode.data
 				previousNode!.next = currentNode.next
 				currentNode.next!.prev = previousNode
-				if (currentNode!.next === null) this.tail = previousNode
+				if (currentNode!.next === null) this.#tail = previousNode
 
 				this.size--
 				return temp;
@@ -146,21 +146,21 @@ export class DoublyLinkedList implements LinkedListApi {
 	}
 
 	update(key: string|number, newValue: any) {
-		if (this.head === null) {
+		if (this.#head === null) {
 			return false;
 		}
 
-		if (this.head.data.key === key) {
-			this.head.data.value = newValue
-			return this.head.data;
+		if (this.#head.data.key === key) {
+			this.#head.data.value = newValue
+			return this.#head.data;
 		}
-		if (this.tail!.data.key === key) {
-			this.tail!.data.value = newValue
-			return this.tail!.data;
+		if (this.#tail!.data.key === key) {
+			this.#tail!.data.value = newValue
+			return this.#tail!.data;
 		}
 
 		// generator function that returns an iterator
-		const iterator = updateGenerator(key, this.head, newValue)
+		const iterator = updateGenerator(key, this.#head, newValue)
 		const iteratorNext = iterator.next()
 		if (iteratorNext.value) {
 			this.size++
@@ -171,19 +171,19 @@ export class DoublyLinkedList implements LinkedListApi {
 	}
 
 	search(key: string|number) {
-		if (this.head === null) {
+		if (this.#head === null) {
 			return false;
 		}
 
-		if (this.head.data.key === key) {
-			return this.head.data;
+		if (this.#head.data.key === key) {
+			return this.#head.data;
 		}
-		if (this.tail!.data.key === key) {
-			return this.tail!.data
+		if (this.#tail!.data.key === key) {
+			return this.#tail!.data
 		}
 
 		// generator function that returns an iterator
-		const iterator = searchGenerator(key, this.head)
+		const iterator = searchGenerator(key, this.#head)
 		const iteratorNext = iterator.next()
 		if (iteratorNext.value) {
 			this.size++
@@ -195,7 +195,7 @@ export class DoublyLinkedList implements LinkedListApi {
 
 	iterator() {
 		// generator function that returns an iterator
-		const iterator = iteratorGenerator(this.head)
+		const iterator = iteratorGenerator(this.#head)
 		return iterator
 	}
 }

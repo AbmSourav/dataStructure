@@ -17,8 +17,8 @@ singlyLinkedList.prepend({key: 11, value: 'add to head'})
 // console.log(singlyLinkedList.update('b', 'after head'));
 // console.log(singlyLinkedList.search('a'));
 
-const it = singlyLinkedList.iterator()
-let itNext = it.next()
+// const it = singlyLinkedList.iterator()
+// let itNext = it.next()
 // console.log(it.next(), it.next(), it.next());
 // while (itNext.done === false) {
 // 	console.log(itNext.value);

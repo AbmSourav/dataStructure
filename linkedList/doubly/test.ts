@@ -20,10 +20,10 @@ console.log('');
 // console.log(doublyLinkedList)
 // doublyLinkedList.log()
 
-const it = doublyLinkedList.iterator()
-let itNext = it.next()
+// const it = doublyLinkedList.iterator()
+// let itNext = it.next()
 // console.log(it.next(), it.next(), it.next());
-while (itNext.done === false) {
-	console.log(itNext.value);
-	itNext = it.next()
-}
+// while (itNext.done === false) {
+// 	console.log(itNext.value);
+// 	itNext = it.next()
+// }
