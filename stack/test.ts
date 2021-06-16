@@ -14,13 +14,13 @@ stack.push({key: 'd', value: 'dd'})
 // console.log(stack.getTop(), stack.getBottom());
 // console.log(stack.search('d'));
 
-const iterator = stack.iterator()
-let iteratorNext = iterator.next()
+// const iterator = stack.iterator()
+// let iteratorNext = iterator.next()
 // console.log(iterator.next(), iterator.next(), iterator.next());
-while (iteratorNext.done === false) {
-	console.log(iteratorNext.value);
-	iteratorNext = iterator.next()
-}
+// while (iteratorNext.done === false) {
+// 	console.log(iteratorNext.value);
+// 	iteratorNext = iterator.next()
+// }
 
-// console.log(stack);
+// console.log(stack)
 // stack.log()
