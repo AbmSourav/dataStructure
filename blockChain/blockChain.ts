@@ -1,11 +1,6 @@
 import { BlockChainApi, BlockType, DataType } from "./helper.d.ts";
+import { searchGenerator, iteratorGenerator } from "./generators.ts"
 import { Block } from "./blockNode.ts";
-import {
-// 	addGenerator,
-// 	updateGenerator,
-	searchGenerator,
-	iteratorGenerator
-} from "./generators.ts"
 
 export class BlockChain implements BlockChainApi {
 	#chain: Array<any>
