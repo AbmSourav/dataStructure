@@ -4,6 +4,9 @@ Different Data Structures implementation API provided by this module.
 API available in TypeScript & JavaScript[ES6].
 <br>
 This library is also available as **[Deno Third party Module](https://deno.land/x/datastructure)**
+<br>
+If you already have installed this module using Deno cli, 
+then run  `deno run -r dataStructure/mod.ts`  for latest version.
 
 <br>
 

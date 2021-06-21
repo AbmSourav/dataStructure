@@ -1,4 +1,5 @@
-import { BlockChain } from "./blockChain.ts";
+// import { BlockChain } from "./blockChain.ts";
+import { BlockChain } from "https://deno.land/x/datastructure/mod.ts";
 
 const blockChain = new BlockChain()
 
