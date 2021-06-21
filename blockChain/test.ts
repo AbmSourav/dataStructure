@@ -14,4 +14,4 @@ const latestBlock = blockChain.latestBlock()
 // blockChain.test()
 console.log(blockChain.checkValidation());
 
-// blockChain.log()
+blockChain.log()
