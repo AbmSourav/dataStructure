@@ -9,6 +9,7 @@ This library is also available as **[Deno Third party Module](https://deno.land/
 
 ## List of Data Structures:
 
+* Block Chain  --  **[Documentation](https://deno.land/x/datastructure/blockChain#blockChain-api)**
 * Hash Table  --  **[Documentation](https://deno.land/x/datastructure/hashTable#hash-table-api)**
 * Singly Linked List  --  **[Documentation](https://deno.land/x/datastructure/linkedList/singly#singly-linked-list-api)**
 * Doubly Linked List  --  **[Documentation](https://deno.land/x/datastructure/linkedList/doubly#doubly-linked-list-api)**
