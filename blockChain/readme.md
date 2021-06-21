@@ -3,7 +3,7 @@
 
 ```ts
 DataType<T> = {
-	key: string|number
+	key: string
 	value: T
 }
 
