@@ -19,7 +19,7 @@ iterator(): Generator
 checkValidation(): boolean
 
 // Time Complexity: O(1)
-createBlock(data: any): boolean
+createBlock(data: DataType<any>): boolean
 
 // Time Complexity: O(1)
 latestBlock(): boolean|BlockType
