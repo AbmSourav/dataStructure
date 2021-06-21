@@ -4,9 +4,11 @@ import { Block } from "./blockNode.ts";
 
 export class BlockChain implements BlockChainApi {
 	#chain: Array<any>
+	length: number
 
 	constructor() {
 		this.#chain = new Array()
+		this.length = this.#chain.length
 	}
 
 	createBlock(data: DataType<any>) {

@@ -1,4 +1,4 @@
-## Singly Linked List Api
+## BlockChain Api
 
 ```ts
 DataType<T> = {

@@ -18,3 +18,4 @@ blockChain.createBlock({key: 'apple', value: "Apple Inc."})
 
 // blockChain.log()
 // console.log(blockChain.search('apple'))
+console.log(blockChain.length)
