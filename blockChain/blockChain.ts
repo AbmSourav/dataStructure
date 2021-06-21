@@ -3,7 +3,7 @@ import { Block } from "./blockNode.ts";
 import {
 // 	addGenerator,
 // 	updateGenerator,
-// 	searchGenerator,
+	searchGenerator,
 	iteratorGenerator
 } from "./generators.ts"
 
@@ -34,13 +34,19 @@ export class BlockChain implements BlockChainApi {
 		return false
 	}
 
-	// get(key: string) {
-	// 	if (this.length === 0) {
-	// 		return false
-	// 	}
+	search(key: string) {
+		if (this.#chain.length === 0) {
+			return false
+		}
 
-	// 	return this.#chain[hash]
-	// }
+		const iterator = searchGenerator(key, this.#chain)
+		let iteratorNext = iterator.next()
+		while (iteratorNext.value) {
+			return iteratorNext.value
+		}
+
+		return false;
+	}
 
 	latestBlock() {
 		if (this.#chain.length <= 0) return false
@@ -81,9 +87,5 @@ export class BlockChain implements BlockChainApi {
 	log() {
 		console.log(this.#chain)
 	}
-
-	// test() {
-	// 	this.#chain[1].data.key = '1'
-	// }
 
 }

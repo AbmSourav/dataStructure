@@ -12,6 +12,7 @@ blockChain.createBlock({key: 'apple', value: "Apple Inc."})
 const latestBlock = blockChain.latestBlock()
 // latestBlock.data.key = '1'
 // blockChain.test()
-console.log(blockChain.checkValidation());
+// console.log(blockChain.checkValidation());
 
-blockChain.log()
+// blockChain.log()
+console.log(blockChain.search('apple'))

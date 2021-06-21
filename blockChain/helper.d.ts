@@ -16,7 +16,7 @@ export type BlockType = {
 // singly linked list interface
 export interface BlockChainApi {
 	createBlock(data: any): boolean
-	// get(key: string): boolean|BlockType
+	search(key: string): boolean|BlockType
 	latestBlock(): boolean|BlockType
 	log(): void;
 	iterator(): Generator

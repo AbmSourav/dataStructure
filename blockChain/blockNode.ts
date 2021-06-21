@@ -1,4 +1,4 @@
-import { BlockType, DataType } from "./helper.d.ts";
+import { DataType } from "./helper.d.ts";
 import { createHash } from "https://deno.land/std/hash/mod.ts";
 
 function blockHash(index: number, data: any, time: Date) {
@@ -10,7 +10,7 @@ function blockHash(index: number, data: any, time: Date) {
 
 export class Block {
 	index: number
-	public data: DataType<any>
+	data: DataType<any>
 	hash: string
 	prevHash: string|null
 	time: Date
