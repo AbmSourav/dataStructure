@@ -1,4 +1,5 @@
 ## BlockChain Api
+<p><code>sha256</code> has been used for creating Hashes.</p>
 
 ```ts
 DataType<T> = {
@@ -7,38 +8,28 @@ DataType<T> = {
 }
 
 // Time Complexity: O(1)
-size: number;
+length: number;
 
 // *generator function, it returens an iterator.
+// loop through all blocks in the chain
 iterator(): Generator
 
-// Time Complexity: O(1)
-prepend(data: DataType<any>): boolean;
-append(data: DataType<any>): boolean;
-
 // Time Complexity: O(n)
-add(data: DataType<any>, position: number): boolean;
+// check for 'the blockChain is corrupted/manipulated or valid'. 
+checkValidation(): boolean
 
 // Time Complexity: O(1)
-getFromHead(): object|false;
+createBlock(data: any): boolean
 
 // Time Complexity: O(1)
-getFromTail(): object|false;
+latestBlock(): boolean|BlockType
 
 // Time Complexity: O(n)
 log(): void;
 
-// Time Complexity:
-// head node: O(1), other nodes: O(n)
-remove(key: string|number): object|boolean;
+// Time Complexity: O(n)
+search(key: string): boolean|BlockType
 
-// Time Complexity:
-// head & tail node: O(1), other nodes: O(n)
-update(key: string|number, newValue: any): object|boolean;
-
-// Time Complexity:
-// head node & tail node: O(1), other nodes: O(n)
-search(key: string|number): object|boolean
 ```
 
 <br>
@@ -46,12 +37,12 @@ search(key: string|number): object|boolean
 
 ## Examples
 ```ts
-import { SinglyLinkedList } from "https://deno.land/x/datastructure/mod.ts";
+import { BlockChain } from "https://deno.land/x/datastructure/mod.ts";
 
-const singlyLinkedList = new SinglyLinkedList()
+const blockChain = new BlockChain()
 
 // iterator method returns a *generator function
-const iterator = singlyLinkedList.iterator()
+const iterator = blockChain.iterator()
 let iteratorNext = iterator.next()
 // console.log(iteratorNext.next(), iteratorNext.next());
 while (iteratorNext.done === false) {
@@ -59,34 +50,21 @@ while (iteratorNext.done === false) {
 	iteratorNext = iterator.next()
 }
 
-// linked list size
-singlyLinkedList.size
+// length or count of total blocks.
+blockChain.length
 
-// adding data at the head of linked list
-singlyLinkedList.prepend({key: 'a', value: 'apple'})
-singlyLinkedList.prepend({key: 'b', value: [1, 2, 3]})
-singlyLinkedList.prepend({key: 11, value: 'add to head'})
+// create a block in the blockChain.
+blockChain.createBlock({key: 'sourav', value: {name: "Sourav"}})
+blockChain.createBlock({key: 'abm', value: "AbmSourav"})
+blockChain.createBlock({key: 'JS', value: ['JS', 'TS']})
 
-// adding data at the tail of linked list
-singlyLinkedList.append({key: 'c', value: 'add to last'})
-
-// insert anywhere except head & tail
-singlyLinkedList.add({key: 'x', value: 'X'}, 1)
-
-// get data from head or tail
-singlyLinkedList.getFromHead()
-singlyLinkedList.getFromTail()
+// get latest created block
+blockChain.latestBlock()
 
 // console all values
-singlyLinkedList.log()
+blockChain.log()
 
-// remove or delete data from linked list
-singlyLinkedList.remove('a')
-
-// update data in linked list
-singlyLinkedList.update('a', [1, 4, 8])
-
-// searching data in linked list
-singlyLinkedList.search('Sourav')
+// searching data in in the blocks
+blockChain.search('JS')
 
 ```

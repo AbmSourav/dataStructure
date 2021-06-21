@@ -16,6 +16,7 @@ export class BlockChain implements BlockChainApi {
 
 		if (this.#chain.length === 0) {
 			this.#chain.push(newBlock)
+			this.length++
 
 			return true
 		}
@@ -24,6 +25,7 @@ export class BlockChain implements BlockChainApi {
 			const prevBlock = this.latestBlock()
 			newBlock.prevHash = prevBlock!.hash
 			this.#chain.push(newBlock)
+			this.length++
 
 			return true
 		}
