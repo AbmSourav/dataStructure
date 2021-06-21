@@ -9,11 +9,12 @@
  * @email <keramotul.islam@gmail.com>
  * @authorUrl https://abmsourav.com
  * @sourceCode https://github.com/AbmSourav/dataStructure
- * @version 1.0.4
+ * @version 1.0.5
  * 
  * Copyright (c) 2021 Keramot UL Islam
  */
 
+export { BlockChain } from "./blockChain/blockChain.ts";
 export { HashTable } from "./hashTable/hashTable.ts";
 export { SinglyLinkedList } from "./linkedList/singly/singlyLinkedList.ts";
 export { DoublyLinkedList } from "./linkedList/doubly/doublyLinkedList.ts";
