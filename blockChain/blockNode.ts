@@ -1,7 +1,7 @@
-import { DataType } from "./helper.d.ts";
+import { DataType, BlockType } from "./helper.d.ts";
 import { createHash } from "https://deno.land/std/hash/mod.ts";
 
-function blockHash(index: number, data: any, time: Date) {
+function blockHash(index: number, data: DataType<any>, time: Date) {
 	let hash = createHash("sha256")
 	hash = hash.update(JSON.stringify(data) + index + time)
 

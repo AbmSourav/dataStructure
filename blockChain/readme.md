@@ -2,6 +2,16 @@
 <p><code>sha256</code> has been used for creating Hashes.</p>
 
 ```ts
+// Each block type
+type BlockType = {
+	index: number
+	data: DataType<any>
+	time: Date
+	hash: string
+	prevHash: null|string
+}
+
+// Each block data type
 DataType<T> = {
 	key: string
 	value: T
@@ -15,7 +25,7 @@ length: number;
 iterator(): Generator
 
 // Time Complexity: O(n)
-// check for 'the blockChain is corrupted/manipulated or valid'. 
+// check for "the blockChain is corrupted/manipulated or valid". 
 checkValidation(): boolean
 
 // Time Complexity: O(1)
@@ -24,11 +34,16 @@ createBlock(data: DataType<any>): boolean
 // Time Complexity: O(1)
 latestBlock(): boolean|BlockType
 
-// Time Complexity: O(n)
-log(): void;
+// Time Complexity:
+//  log all: O(n)
+//  log by key: O(n)
+//  log by index: O(1)
+log(key: null|string = null, index: null|number = null): void;
 
-// Time Complexity: O(n)
-search(key: string): boolean|BlockType
+// Time Complexity: 
+//  search by key: O(n)
+//  search by index: O(1)
+search(key: null|string, index: null|number = null): boolean|BlockType
 
 ```
 
@@ -53,7 +68,7 @@ while (iteratorNext.done === false) {
 // length or count of total blocks.
 blockChain.length
 
-// create a block in the blockChain.
+// create a new block in the blockChain.
 blockChain.createBlock({key: 'sourav', value: {name: "Sourav"}})
 blockChain.createBlock({key: 'abm', value: "AbmSourav"})
 blockChain.createBlock({key: 'JS', value: ['JS', 'TS']})
@@ -63,8 +78,14 @@ blockChain.latestBlock()
 
 // console all values
 blockChain.log()
+// console the block that has key: 'abm'
+blockChain.log('abm')
+// console then block which is index: 3
+blockChain.log(null, 3)
 
-// searching data in in the blocks
+// searching block by key
 blockChain.search('JS')
+// searching block by index
+blockChain.search(null, 2)
 
 ```

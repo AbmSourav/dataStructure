@@ -1,5 +1,5 @@
-// import { BlockChain } from "./blockChain.ts";
-import { BlockChain } from "https://deno.land/x/datastructure/mod.ts";
+import { BlockChain } from "./blockChain.ts";
+// import { BlockChain } from "https://deno.land/x/datastructure/mod.ts";
 
 const blockChain = new BlockChain()
 
@@ -7,16 +7,14 @@ blockChain.createBlock({key: 'sourav', value: "Sourav"})
 blockChain.createBlock({key: 'abm', value: "AbmSourav"})
 blockChain.createBlock({key: 'apple', value: "Apple Inc."})
 
-const it = blockChain.iterator()
-console.log(it.next(), it.next(), it.next(), it.next());
+// const it = blockChain.iterator()
+// console.log(it.next(), it.next(), it.next(), it.next());
 
-// const latestBlock = blockChain.latestBlock()
-// console.log(latestBlock);
+// console.log(blockChain.latestBlock());
 
-// latestBlock.data.key = '1'
-// blockChain.test()
+// blockChain.latestBlock().data.key = '1'
 // console.log(blockChain.checkValidation());
 
-// blockChain.log()
-// console.log(blockChain.search('apple'))
-console.log(blockChain.length)
+// blockChain.log(null, 3)
+console.log(blockChain.search('sourav'))
+// console.log(blockChain.length)

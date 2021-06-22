@@ -33,15 +33,21 @@ export class BlockChain implements BlockChainApi {
 		return false
 	}
 
-	search(key: string) {
+	search(key: null|string, index: null|number = null) {
 		if (this.#chain.length === 0) {
 			return false
 		}
 
-		const iterator = searchGenerator(key, this.#chain)
-		let iteratorNext = iterator.next()
-		while (iteratorNext.value) {
-			return iteratorNext.value
+		if (key) {
+			const iterator = searchGenerator(key, this.#chain)
+			let iteratorNext = iterator.next()
+			if (iteratorNext.value) {
+				return iteratorNext.value
+			}
+		}
+
+		if (index) {
+			return this.#chain[index - 1]
 		}
 
 		return false;
@@ -83,7 +89,15 @@ export class BlockChain implements BlockChainApi {
 		return true
 	}
 
-	log() {
+	log(key: null|string = null, index: null|number = null) {
+		if (key) {
+			return console.log(this.search(key))
+		}
+
+		if (index) {
+			return console.log(this.#chain[index - 1])
+		}
+
 		console.log(this.#chain)
 	}
 
