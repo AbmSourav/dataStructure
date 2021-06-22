@@ -5,7 +5,7 @@ API available in TypeScript & JavaScript[ES6].
 <br>
 This library is also available as **[Deno Third party Module](https://deno.land/x/datastructure)**
 <p>
-If you already have installed this module in your project, 
+If you're already using this module in your Deno project, 
 then run  <code>deno run -r projectName/fileName.ts</code>  for latest version.
 </p>
 
