@@ -27,8 +27,10 @@ update(key: string, newValue: DataType<any>): boolean|DataType<any>
 //  worst case: O(n)
 get(key: string): boolean|DataType<any>
 
-// Time Complexity: O(n)
-log(column: string[]): void,
+// Time Complexity: 
+//  log all items: O(n)
+//  log by key: avg. O(1), worst: O(n)
+log(key?: string): void,
 ```
 
 <br>
@@ -65,4 +67,6 @@ hashTable.update('abm', {name: 'AbmSourav'})
 
 // console all values
 hashTable.log()
+// console by key
+hashTable.log('abm')
 ```

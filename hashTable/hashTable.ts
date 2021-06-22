@@ -110,11 +110,29 @@ export class HashTable implements HashTableApi {
 		return false
 	}
 
-	log(column: string[] = []) {
-		if (column.length > 0) {
-			return console.table(this.#table, column)
+	log(key?: string) {
+		if (this.length <= 0) return false
+
+		if (key) {
+			let index = hashFunction(key)
+			if (this.#table[index].data.key === key) {
+				return console.log(this.#table[index])
+			}
+			if (this.#table[index] && this.#table[index].next) {
+				let currentNode = this.#table[index].next
+				while (currentNode) {
+					if (currentNode.data.key === key) {
+						return console.log(currentNode)
+					}
+
+					currentNode = currentNode.next
+				}
+			}
 		}
-		return console.table(this.#table);
+
+		for (let cell in this.#table) {
+			console.log(this.#table[cell])
+		}
 	}
 
 	iterator() {

@@ -16,6 +16,6 @@ export interface HashTableApi {
 	remove(key: string): boolean|any[]
 	update(key: string, newValue: DataType<any>): boolean|DataType<any>
 	get(key: string): boolean|DataType<any>
-	log(column: string[]): void,
+	log(key?: string): void,
 	iterator(): Generator
 }
