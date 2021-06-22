@@ -4,22 +4,22 @@ export type DataType<T> = {
 	value: T
 }
 
-// singly linked list node class
+// BlockChain type of each block
 export type BlockType = {
 	index: number
 	data: DataType<any>
 	time: Date
 	hash: string
 	prevHash: null|string
-}|null
+}
 
-// singly linked list interface
+// Block chain interface
 export interface BlockChainApi {
 	length: number
 	createBlock(data: DataType<any>): boolean
-	search(key: string): boolean|BlockType
+	search(key: null|string, index: null|number): boolean|BlockType
 	latestBlock(): boolean|BlockType
-	log(): void;
+	log(key: null|string, index: null|number): void;
 	iterator(): Generator
 	checkValidation(): boolean
 }

@@ -17,7 +17,7 @@ hashTable.add({key: "microsoft", value: "MicroSoft"})
 // console.log(hashTable.update('bma', {name: 'Apple'}));
 // console.log(hashTable)
 
-hashTable.log()
+hashTable.log('appl')
 
 // Deno.test("Add", function() {
 // 	assertEquals(hashTable.add({key: "abm", value: "Sourav"}), true)

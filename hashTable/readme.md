@@ -27,8 +27,10 @@ update(key: string, newValue: DataType<any>): boolean|DataType<any>
 //  worst case: O(n)
 get(key: string): boolean|DataType<any>
 
-// Time Complexity: O(n)
-log(column: string[]): void,
+// Time Complexity: 
+//  log all items: O(n)
+//  log by key: avg. O(1), worst: O(n)
+log(key?: string): void,
 ```
 
 <br>
@@ -60,9 +62,11 @@ while (iteratorNext.done === false) {
 // get element from hash table
 hashTable.get('abm')
 
-// update elements using the key
+// update element's data using the key
 hashTable.update('abm', {name: 'AbmSourav'})
 
-// console all values
+// console all elements
 hashTable.log()
+// console element by key
+hashTable.log('abm')
 ```

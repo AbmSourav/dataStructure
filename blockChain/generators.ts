@@ -1,4 +1,4 @@
-export function *searchGenerator(key: string|number, chain: Array<any>) {
+export function *searchGenerator(key: string, chain: Array<any>) {
 	for (let block in chain) {
 		if (chain[block].data.key === key) {
 			yield chain[block]
