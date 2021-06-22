@@ -7,8 +7,13 @@ blockChain.createBlock({key: 'sourav', value: "Sourav"})
 blockChain.createBlock({key: 'abm', value: "AbmSourav"})
 blockChain.createBlock({key: 'apple', value: "Apple Inc."})
 
-// const it = blockChain.iterator()
-// console.log(it.next(), it.next(), it.next(), it.next());
+// const iterator = blockChain.iterator()
+// let iteratorNext = iterator.next()
+// console.log(iterator.next(), iterator.next());
+// while (iteratorNext.done === false) {
+// 	console.log(iteratorNext.value);
+// 	iteratorNext = iterator.next()
+// }
 
 // console.log(blockChain.latestBlock());
 

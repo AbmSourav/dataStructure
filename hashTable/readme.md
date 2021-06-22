@@ -62,11 +62,11 @@ while (iteratorNext.done === false) {
 // get element from hash table
 hashTable.get('abm')
 
-// update elements using the key
+// update element's data using the key
 hashTable.update('abm', {name: 'AbmSourav'})
 
-// console all values
+// console all elements
 hashTable.log()
-// console by key
+// console element by key
 hashTable.log('abm')
 ```
