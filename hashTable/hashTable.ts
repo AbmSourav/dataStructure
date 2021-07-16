@@ -19,6 +19,10 @@ export class HashTable implements HashTableApi {
 		this.length = 0
 	}
 
+	static createHT() {
+		return new this();
+	}
+
 	add(data: DataType<any>) {
 		const index = hashFunction(data.key)
 		const node = new HashNode(data)

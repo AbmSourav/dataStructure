@@ -1,6 +1,10 @@
 ## Hash Table Api
 
 ```ts
+
+// static method that creates a instance of `HashTable` class.
+HashTable.createHT()
+
 // Time Complexity: O(1)
 length: number
 
@@ -40,7 +44,7 @@ log(key?: string): void,
 ```ts
 import { HashTable } from "https://deno.land/x/datastructure/mod.ts";
 
-const hashTable = new HashTable()
+const hashTable = HashTable.createHT()
 
 // add element in the hash table
 // if hash keys are same, then it will create chaining with LinkedList
