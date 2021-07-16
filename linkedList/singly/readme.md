@@ -6,6 +6,9 @@ DataType<T> = {
 	value: T
 }
 
+// static method that creates a instance of `SinglyLinkedList` class.
+SinglyLinkedList.createSL()
+
 // Time Complexity: O(1)
 size: number;
 
@@ -48,7 +51,7 @@ search(key: string|number): object|boolean
 ```ts
 import { SinglyLinkedList } from "https://deno.land/x/datastructure/mod.ts";
 
-const singlyLinkedList = new SinglyLinkedList()
+const singlyLinkedList = SinglyLinkedList.createSL()
 
 // iterator method returns a *generator function
 const iterator = singlyLinkedList.iterator()

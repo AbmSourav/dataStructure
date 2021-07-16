@@ -6,7 +6,7 @@ DataType<T> = {
 	value: T
 }
 
-// static method that creates a instance of Stack class.
+// static method that creates a instance of `Stack` class.
 Stack.createStack()
 
 // Time Complexity: O(1)

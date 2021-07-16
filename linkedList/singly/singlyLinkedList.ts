@@ -18,6 +18,10 @@ export class SinglyLinkedList implements LinkedListApi {
 		this.size = 0
 	}
 
+	static createSL() {
+		return new this();
+	}
+
 	// insert in the head
 	prepend(data: DataType<any>) {
 		if (this.#head === null) {

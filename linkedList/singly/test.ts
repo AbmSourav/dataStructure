@@ -1,7 +1,7 @@
 import { SinglyLinkedList } from "./singlyLinkedList.ts";
 // import { SinglyLinkedList } from "https://deno.land/x/datastructure/mod.ts"
 
-const singlyLinkedList = new SinglyLinkedList()
+const singlyLinkedList = SinglyLinkedList.createSL()
 
 singlyLinkedList.prepend({key: 'a', value: 'apple'})
 singlyLinkedList.prepend({key: 'b', value: [1, 2, 3]})
@@ -26,4 +26,4 @@ singlyLinkedList.prepend({key: 11, value: 'add to head'})
 // }
 
 // console.log(singlyLinkedList);
-// singlyLinkedList.log()
+singlyLinkedList.log()
