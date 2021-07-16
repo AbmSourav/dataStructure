@@ -1,7 +1,7 @@
 import { BlockChain } from "./blockChain.ts";
 // import { BlockChain } from "https://deno.land/x/datastructure/mod.ts";
 
-const blockChain = new BlockChain()
+const blockChain = BlockChain.createBlockChain()
 
 blockChain.createBlock({key: 'sourav', value: "Sourav"})
 blockChain.createBlock({key: 'abm', value: "AbmSourav"})
@@ -20,6 +20,6 @@ blockChain.createBlock({key: 'apple', value: "Apple Inc."})
 // blockChain.latestBlock().data.key = '1'
 // console.log(blockChain.checkValidation());
 
-// blockChain.log(null, 3)
-console.log(blockChain.search('sourav'))
+blockChain.log(null, 3)
+// console.log(blockChain.search('sourav'))
 // console.log(blockChain.length)
