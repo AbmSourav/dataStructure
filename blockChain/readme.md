@@ -20,12 +20,6 @@ DataType<T> = {
 // static method that creates a instance of `BlockChain` class.
 BlockChain.createBlockChain()
 
-// Each block data type
-DataType<T> = {
-	key: string
-	value: T
-}
-
 // Time Complexity: O(1)
 length: number;
 
