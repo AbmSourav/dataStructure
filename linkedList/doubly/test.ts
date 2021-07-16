@@ -1,7 +1,7 @@
 import { DoublyLinkedList } from "./doublyLinkedList.ts";
 // import { DoublyLinkedList } from "https://deno.land/x/datastructure/mod.ts"
 
-const doublyLinkedList = new DoublyLinkedList()
+const doublyLinkedList = DoublyLinkedList.createDL()
 
 doublyLinkedList.prepend({key: 'a', value: 'apple'})
 doublyLinkedList.prepend({key: 'b', value: [1, 2, 3]})
@@ -18,7 +18,7 @@ doublyLinkedList.append({key: 'd', value: 'add to last'})
 console.log(doublyLinkedList.search('b'));
 console.log('');
 // console.log(doublyLinkedList)
-// doublyLinkedList.log()
+doublyLinkedList.log()
 
 // const it = doublyLinkedList.iterator()
 // let itNext = it.next()

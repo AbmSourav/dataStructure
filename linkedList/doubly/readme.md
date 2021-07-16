@@ -6,6 +6,9 @@ DataType<T> = {
 	value: T
 }
 
+// static method that creates a instance of `DoublyLinkedList` class.
+DoublyLinkedList.createDL()
+
 // Time Complexity: O(1)
 size: number;
 
@@ -48,7 +51,7 @@ search(key: string|number): object|null
 ```ts
 import { DoublyLinkedList } from "https://deno.land/x/datastructure/mod.ts";
 
-const doublyLinkedList = new DoublyLinkedList()
+const doublyLinkedList = DoublyLinkedList.createDL()
 
 // iterator method returns a *generator function
 const iterator = doublyLinkedList.iterator()

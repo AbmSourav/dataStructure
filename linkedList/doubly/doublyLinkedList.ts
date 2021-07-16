@@ -19,6 +19,10 @@ export class DoublyLinkedList implements LinkedListApi {
 		this.size = 0
 	}
 
+	static createDL() {
+		return new this();
+	}
+
 	// insert in the head
 	prepend(data: DataType<any>) {
 		const newNode = new DoublyNode(data);
