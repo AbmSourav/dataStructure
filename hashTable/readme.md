@@ -1,6 +1,11 @@
 ## Hash Table Api
 
 ```ts
+// data type
+DataType<T> = {
+	key: string
+	value: T
+}
 
 // static method that creates a instance of `HashTable` class.
 HashTable.createHT()

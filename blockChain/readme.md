@@ -11,6 +11,12 @@ type BlockType = {
 	prevHash: null|string
 }
 
+// data type
+DataType<T> = {
+	key: string
+	value: T
+}
+
 // static method that creates a instance of `BlockChain` class.
 BlockChain.createBlockChain()
 
