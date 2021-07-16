@@ -6,6 +6,9 @@ DataType<T> = {
 	value: T
 }
 
+// static method that creates a instance of Queue class.
+Queue.createQueue()
+
 // Time Complexity: O(1)
 size: number;
 
@@ -43,7 +46,7 @@ log(): void;
 ```ts
 import { Queue } from "https://deno.land/x/datastructure/mod.ts";
 
-const queue = new Queue()
+const queue = Queue.createQueue()
 
 // add data in the Queue in a FIFO way
 queue.enqueue({key: 'a', value: [1, 2, 5]})

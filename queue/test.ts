@@ -1,7 +1,7 @@
 // import { Queue } from "https://deno.land/x/datastructure/mod.ts";
 import { Queue } from "./queue.ts";
 
-const queue = new Queue()
+const queue = Queue.createQueue()
 queue.enqueue({key: 'a', value: 'aa'});
 queue.enqueue({key: 'b', value: [1, 2, 5]})
 queue.enqueue({key: 'sourav', value: {name: "Sourav"}})
@@ -20,5 +20,5 @@ queue.enqueue({key: 'sourav', value: {name: "Sourav"}})
 // 	iteratorNext = iterator.next()
 // }
 
-console.log(queue);
-// queue.log()
+// console.log(queue);
+queue.log()
