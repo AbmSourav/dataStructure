@@ -18,6 +18,10 @@ export class Stack implements StackApi {
 		this.size = 0
 	}
 
+	static createStack() {
+		return new this();
+	}
+
 	getTop() {
 		if (this.#topNode === null) return null;
 		return this.#topNode!.data

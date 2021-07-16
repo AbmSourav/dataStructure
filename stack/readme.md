@@ -6,6 +6,9 @@ DataType<T> = {
 	value: T
 }
 
+// static method that creates a instance of Stack class.
+Stack.createStack()
+
 // Time Complexity: O(1)
 size: number;
 
@@ -43,7 +46,7 @@ log(): void;
 ```ts
 import { Stack } from "https://deno.land/x/datastructure/mod.ts";
 
-const stack = new Stack()
+const stack = Stack.createStack()
 
 // stack length/size
 stack.size
