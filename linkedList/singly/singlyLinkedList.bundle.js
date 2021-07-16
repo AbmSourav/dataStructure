@@ -56,6 +56,9 @@ class SinglyLinkedList1 {
         this.#tail = null;
         this.size = 0;
     }
+    static createSL() {
+        return new this();
+    }
     prepend(data) {
         if (this.#head === null) {
             const newNode = new SinglyNode(data);
