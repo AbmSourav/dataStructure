@@ -1,7 +1,7 @@
 import { HashTable } from "./hashTable.ts"
 import { assert, assertEquals } from "https://deno.land/std/testing/asserts.ts";
 
-const hashTable = new HashTable()
+const hashTable = HashTable.createHT()
 
 hashTable.add({key: "abm", value: "Sourav"})
 hashTable.add({key: "bma", value: {company: "Apple LLC"}})
@@ -17,7 +17,7 @@ hashTable.add({key: "microsoft", value: "MicroSoft"})
 // console.log(hashTable.update('bma', {name: 'Apple'}));
 // console.log(hashTable)
 
-hashTable.log('appl')
+hashTable.log()
 
 // Deno.test("Add", function() {
 // 	assertEquals(hashTable.add({key: "abm", value: "Sourav"}), true)

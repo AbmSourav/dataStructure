@@ -58,6 +58,9 @@ class DoublyLinkedList1 {
         this.#tail = null;
         this.size = 0;
     }
+    static createDL() {
+        return new this();
+    }
     prepend(data) {
         const newNode = new DoublyNode(data);
         if (this.#head === null) {

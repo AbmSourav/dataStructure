@@ -18,6 +18,10 @@ export class Queue implements QueueApi {
 		this.size = 0
 	}
 
+	static createQueue() {
+		return new this();
+	}
+
 	getFront() {
 		if (this.#frontNode === null) return null
 		return this.#frontNode!.data

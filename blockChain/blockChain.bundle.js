@@ -381,11 +381,11 @@ class Block {
     hash;
     prevHash;
     time;
-    constructor(data1, index){
-        this.index = index;
+    constructor(data1, index1){
+        this.index = index1;
         this.data = data1;
         this.time = new Date();
-        this.hash = blockHash(index, data1, this.time);
+        this.hash = blockHash(index1, data1, this.time);
         this.prevHash = null;
     }
     regenerateHash() {
@@ -400,6 +400,9 @@ class BlockChain1 {
     constructor(){
         this.#chain = new Array();
         this.length = this.#chain.length;
+    }
+    static createBlockChain() {
+        return new this();
     }
     createBlock(data) {
         const newBlock = new Block(data, this.#chain.length + 1);
@@ -417,14 +420,19 @@ class BlockChain1 {
         }
         return false;
     }
-    search(key) {
+    search(key, index = null) {
         if (this.#chain.length === 0) {
             return false;
         }
-        const iterator = searchGenerator(key, this.#chain);
-        let iteratorNext = iterator.next();
-        while(iteratorNext.value){
-            return iteratorNext.value;
+        if (key) {
+            const iterator = searchGenerator(key, this.#chain);
+            let iteratorNext = iterator.next();
+            if (iteratorNext.value) {
+                return iteratorNext.value;
+            }
+        }
+        if (index) {
+            return this.#chain[index - 1];
         }
         return false;
     }
@@ -458,7 +466,13 @@ class BlockChain1 {
         console.log('The Chain is valid.');
         return true;
     }
-    log() {
+    log(key = null, index = null) {
+        if (key) {
+            return console.log(this.search(key));
+        }
+        if (index) {
+            return console.log(this.#chain[index - 1]);
+        }
         console.log(this.#chain);
     }
 }

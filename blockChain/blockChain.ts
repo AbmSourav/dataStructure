@@ -11,6 +11,10 @@ export class BlockChain implements BlockChainApi {
 		this.length = this.#chain.length
 	}
 
+	static createBlockChain() {
+		return new this();
+	}
+
 	createBlock(data: DataType<any>) {
 		const newBlock = new Block(data, this.#chain.length + 1)
 

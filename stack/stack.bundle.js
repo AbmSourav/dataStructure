@@ -41,6 +41,9 @@ class Stack1 {
         this.#bottomNode = null;
         this.size = 0;
     }
+    static createStack() {
+        return new this();
+    }
     getTop() {
         if (this.#topNode === null) return null;
         return this.#topNode.data;

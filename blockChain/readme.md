@@ -11,6 +11,9 @@ type BlockType = {
 	prevHash: null|string
 }
 
+// static method that creates a instance of `BlockChain` class.
+BlockChain.createBlockChain()
+
 // Each block data type
 DataType<T> = {
 	key: string
@@ -54,7 +57,7 @@ search(key: null|string, index: null|number = null): boolean|BlockType
 ```ts
 import { BlockChain } from "https://deno.land/x/datastructure/mod.ts";
 
-const blockChain = new BlockChain()
+const blockChain = BlockChain.createBlockChain()
 
 // iterator method returns a *generator function
 const iterator = blockChain.iterator()

@@ -68,6 +68,9 @@ class HashTable1 {
         this.#table = new Array();
         this.length = 0;
     }
+    static createHT() {
+        return new this();
+    }
     add(data) {
         const index = hashFunction(data.key);
         const node = new HashNode(data);
@@ -139,11 +142,26 @@ class HashTable1 {
         }
         return false;
     }
-    log(column = []) {
-        if (column.length > 0) {
-            return console.table(this.#table, column);
+    log(key) {
+        if (this.length <= 0) return false;
+        if (key) {
+            let index = hashFunction(key);
+            if (this.#table[index].data.key === key) {
+                return console.log(this.#table[index]);
+            }
+            if (this.#table[index] && this.#table[index].next) {
+                let currentNode = this.#table[index].next;
+                while(currentNode){
+                    if (currentNode.data.key === key) {
+                        return console.log(currentNode);
+                    }
+                    currentNode = currentNode.next;
+                }
+            }
         }
-        return console.table(this.#table);
+        for(let cell in this.#table){
+            console.log(this.#table[cell]);
+        }
     }
     iterator() {
         const iterator = iteratorGenerator(this.#table);
