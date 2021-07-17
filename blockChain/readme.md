@@ -11,14 +11,14 @@ type BlockType = {
 	prevHash: null|string
 }
 
-// static method that creates a instance of `BlockChain` class.
-BlockChain.createBlockChain()
-
-// Each block data type
+// data type
 DataType<T> = {
 	key: string
 	value: T
 }
+
+// static method that creates a instance of `BlockChain` class.
+BlockChain.createBlockChain()
 
 // Time Complexity: O(1)
 length: number;
