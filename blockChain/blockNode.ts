@@ -1,5 +1,5 @@
 import { DataType, BlockType } from "./helper.d.ts";
-import { createHash } from "https://deno.land/std/hash/mod.ts";
+import { createHash } from "https://deno.land/std@0.167.0/hash/mod.ts";
 
 function blockHash(index: number, data: DataType<any>, time: Date) {
 	let hash = createHash("sha256")
